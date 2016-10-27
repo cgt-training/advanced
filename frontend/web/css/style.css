@@ -1,0 +1,117 @@
+.*{
+  font-family: verdana;
+}
+.text-default{
+  color:#fff !important;
+  font-family: verdana;
+}
+
+.logo{
+  margin-left: 75px;
+}
+
+.main_panel{
+  background: url('../img/new_banner.jpeg') no-repeat;
+  height: 480px;
+}
+.menu li{
+  color:#fff;
+}
+.menu > li:first-child > a{
+  border-radius: 4px 0px 0px 0px;
+}
+
+.menu > li:last-child > a{
+  border-radius: 0px 4px 0px 0px  !important;
+}
+.menu > li:not(:last-child):not(:first-child) > a{
+  border-radius: 0px;
+}
+.menu > li > a{
+  color:#FFF !important;
+  font-weight: bold;
+  border: 0 none !important;
+  font-weight: 400;
+  padding:10px 0px;
+  text-align: center;
+
+}
+.menu > li > a:hover, .menu > li.active > a , .menu > li.active:hover > a{
+  background:#A8AFA2;
+  opacity: .7;
+  border: 0 none !important;
+  
+}
+
+.cirlce_class
+{
+  display: inline-block;
+  border-radius: 60px;
+  radius-color:orange;
+  box-shadow: 0px 0px 2px #888;
+  height: 50px;
+}
+
+.circle-div:hover{
+  display: inline-block;
+  border-radius: 60px;
+  box-shadow: 0px 0px 2px #888;
+  background-color:orange;
+  color:orange;
+}
+
+.nav_1 > li > a {margin-left:45px;margin-right:47px;}
+
+
+ul.nav > li > a:hover {
+  background-color: orange;
+  
+  border-style: none;
+}
+
+ul.nav >li.active >a { 
+    background-color:orange; 
+    border-style: none;
+}
+
+.circle {
+  border-radius:50%;
+  color: black;
+  display:table;
+  height: 100px;
+  font-weight: bold;
+  font-size: 1.2em;
+  width: auto;
+  margin:0 auto;
+}
+.circle span {
+  display:table-cell;
+  vertical-align:middle;
+  height:80px;
+  width:80px;
+  text-align:center;
+  padding: 0 15px;
+}
+
+.circle-icon {
+  border-radius:50%;
+  color: black;
+  display:table;
+  height: 60px;
+  font-weight: bold;
+  font-size: 1.2em;
+  width: auto;
+  margin:0 auto;
+}
+.circle-icon span {
+  display:table-cell;
+  vertical-align:middle;
+  height:30px;
+  width:30px;
+  text-align:center;
+  padding: 0 15px;
+}
+
+.icon-img{
+  height: 25px;
+}
