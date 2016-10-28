@@ -1,0 +1,453 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"prit",
+				"print_r"
+			],
+			[
+				"ex",
+				"exit"
+			],
+			[
+				"get_cla",
+				"get_class_methods"
+			],
+			[
+				"print",
+				"print_r"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "backend/views/layouts/main.php",
+			"settings":
+			{
+				"buffer_size": 4217,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "backend/views/layouts/header.php",
+			"settings":
+			{
+				"buffer_size": 11062,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "backend/views/layouts/slider.php",
+			"settings":
+			{
+				"buffer_size": 2916,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/Makefile/Make.sublime-build",
+					""
+				],
+				[
+					"Packages/Makefile/Make.sublime-build",
+					"Clean"
+				]
+			],
+			[
+				"Packages/Makefile/Make.sublime-build",
+				"Clean"
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/var/www/html/advanced",
+		"/var/www/html/advanced/backend",
+		"/var/www/html/advanced/backend/views",
+		"/var/www/html/advanced/backend/views/layouts"
+	],
+	"file_history":
+	[
+		"/var/www/owncloud8.2/apps/don/appinfo/app.php",
+		"/var/www/owncloud8.2/config/config.php",
+		"/media/kapil/A498805C98802F3C/aabid/DRON/detail.txt",
+		"/var/www/owncloud8.2/apps/don/frontend/app/main/companies/add/template.hbs",
+		"/var/www/owncloud8.2/apps/don/appinfo/routes.php",
+		"/var/www/owncloud8.2/apps/don/db/companymapper.php",
+		"/var/www/owncloud8.2/apps/don/db/company.php",
+		"/var/www/owncloud8.2/apps/don/service/userservice.php",
+		"/var/www/owncloud8.2/apps/don/controller/companycontroller.php",
+		"/var/www/owncloud8.2/apps/don/frontend/app/main/companies/add/controller.js",
+		"/var/www/owncloud8.2/apps/don/frontend/app/main/companies/add/route.js",
+		"/var/www/owncloud8.2/apps/don/frontend/app/router.js",
+		"/var/www/owncloud8.2/apps/don/frontend/app/register/step2/controller.js",
+		"/var/www/owncloud8.2/apps/don/frontend/app/models/company.js",
+		"/var/www/s2ci/config/config.php",
+		"/media/kapil/A498805C98802F3C/aabid/DRON/s2ci/config/config.php",
+		"/var/www/owncloud8.2/apps/don/templates/main.php",
+		"/var/www/owncloud9.1/apps/don/mail/zurb/don/gulpfile.babel.js",
+		"/var/www/owncloud8.2/apps/don/controller/clientinfocontroller.php",
+		"/var/www/owncloud8.2/apps/don/db/droneclientmapper.php",
+		"/var/www/owncloud8.2/apps/don/db/jobrammapper.php",
+		"/var/www/owncloud8.2/apps/don/db/jobsubmissionmapper.php",
+		"/var/www/owncloud8.2/apps/don/db/settingsmapper.php",
+		"/home/kapil/.config/sublime-text-3/Packages/Default/Default (Linux).sublime-keymap",
+		"/home/kapil/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
+		"/var/www/owncloud8.2/apps/don/db/droneclient.php",
+		"/var/www/owncloud8.2/apps/don/service/mailgunservice.php",
+		"/var/www/owncloud8.2/apps/don/mail/client-registration-step1.html",
+		"/var/www/owncloud/config/config.php",
+		"/var/www/owncloud8.2/apps/don/vendor/autoload.php",
+		"/var/www/owncloud8.2/apps/don/vendor/composer/autoload_real.php",
+		"/var/www/owncloud8.2/apps/don/vendor/composer/autoload_classmap.php",
+		"/var/www/owncloud8.2/apps/don/frontend/app/models/clientinfo.js",
+		"/var/www/owncloud8.2/apps/don/.gitignore",
+		"/etc/hosts",
+		"/home/kapil/.cache/.fr-yfUGTP/s2ci/config/config.php",
+		"/var/www/owncloud/apps/don/templates/main.php",
+		"/media/kapil/A498805C98802F3C/aabid/DRON/s2ci/themes/fai/defaults.php",
+		"/var/www/owncloud/apps/don/controller/pilotscontroller.php",
+		"/var/www/owncloud/apps/don/controller/pilotcontroller.php",
+		"/var/www/owncloud/apps/don/controller/pagecontroller.php",
+		"/var/www/owncloud/apps/don/controller/clientinfocontroller.php",
+		"/var/www/owncloud/apps/don/frontend/tmp/babel-output_path-0nMEc9iI.tmp/ember-ajax/request.js",
+		"/var/www/owncloud/apps/don/appinfo/adminer.php",
+		"/var/www/owncloud/apps/don/controller/admindashcontroller.php"
+	],
+	"find":
+	{
+		"height": 32.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			"/var/www/owncloud8.2/apps",
+			"/var/www/owncloud8.2/apps/don/service"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"The username is already being used",
+			"$this->j_tablename",
+			"droneapp_client",
+			"_",
+			"company",
+			"\n    ",
+			"dcmapper",
+			"$this->dcmapper",
+			"company",
+			"dc_",
+			"	",
+			"mailer",
+			"https:",
+			"http",
+			"OC user exists with this email",
+			"createUnverifiedUser",
+			"insertOne",
+			"OC user exists with this email",
+			"client",
+			"model",
+			": ",
+			"name",
+			"attr",
+			"PhpIncludeInspection"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "backend/views/layouts/main.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4217,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								765,
+								765
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "backend/views/layouts/header.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 11062,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "backend/views/layouts/slider.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2916,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								171,
+								171
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 26.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 112.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.unsaved_changes":
+	{
+		"height": 118.0
+	},
+	"pinned_build_system": "",
+	"project": "sublime-yii-project",
+	"replace":
+	{
+		"height": 48.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"app.php",
+				"appinfo/app.php"
+			],
+			[
+				"main",
+				"templates/main.php"
+			],
+			[
+				"mailgunservice",
+				"service/mailgunservice.php"
+			],
+			[
+				"clientinf",
+				"controller/clientinfocontroller.php"
+			],
+			[
+				"routes",
+				"appinfo/routes.php"
+			],
+			[
+				"main.php",
+				"templates/main.php"
+			],
+			[
+				"user",
+				"service/userservice.php"
+			],
+			[
+				"page",
+				"controller/pagecontroller.php"
+			],
+			[
+				"adapter.",
+				"frontend/app/application/adapter.js"
+			],
+			[
+				"irequest",
+				"frontend/tmp/babel-output_path-0nMEc9iI.tmp/ember-ajax/request.js"
+			],
+			[
+				"appinfo/app",
+				"appinfo/adminer.php"
+			],
+			[
+				"pilo",
+				"controller/pilotcontroller.php"
+			],
+			[
+				"controller.php",
+				"controller/admindashcontroller.php"
+			],
+			[
+				"client",
+				"controller/clientinfocontroller.php"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 204.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

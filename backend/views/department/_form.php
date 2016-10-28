@@ -12,61 +12,53 @@ use kartik\select2\Select2;
 
 <div class="department-form">
 
-    <?php $form = ActiveForm::begin([
-                                      'id' => 'dept_form_id',
-                                      'action' => '#',
-                                  ]); ?>
+    <?php $form = ActiveForm::begin(['id' => 'dept_form_id','options' => ['enctype' => 'multipart/form-data','class'=>'form-horizontal']]); ?>
 
-    <?= $form->field($model, 'dept_id')->textInput() ?>
+    <h1><?= Html::encode($this->title) ?></h1>
 
-    <?php
-        /*echo $form->field($model, 'c_id')->widget(Select2::classname(), [
-        'data' => $List_Company_Arr,
-        'language' => 'de',
-        'options' => ['placeholder' => 'Select a Company ...'],
-        'pluginOptions' => [
-            'allowClear' => true
-        ],
-      ]);
-*/
-    ?>
+    <div class="box-body">
 
-    <?php
-  /*      echo $form->field($model, 'b_id')->widget(Select2::classname(), [
-        'data' => $List_Branches_Arr,
-        'language' => 'de',
-        'options' => ['placeholder' => 'Select a Branch ...'],
-        'pluginOptions' => [
-            'allowClear' => true
-        ],
-      ]);
-*/
-    ?>
+      <?= $form->field($model, 'dept_id', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
+                                            'labelOptions' => [ 'class' => 'control-label col-sm-3',]
+                                        ])->textInput(['maxlength' => true,'placeholder'=>'Department Id']) ?>
 
-    <?= $form->field($model, 'c_id')->dropDownList([ $List_Company_Arr, ], ['prompt' => '']) ?>
-    <?= $form->field($model, 'b_id')->dropDownList([ $List_Branches_Arr, ], ['prompt' => '']) ?>
+      <?= $form->field($model, 'c_id', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
+                                            'labelOptions' => [ 'class' => 'control-label col-sm-3',]
+                                        ])->dropDownList([ $List_Company_Arr, ], ['prompt' => '']) ?>
 
-    <?= $form->field($model, 'dept_name')->textInput(['maxlength' => true]) ?>
+      <?= $form->field($model, 'b_id', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
+                                            'labelOptions' => [ 'class' => 'control-label col-sm-3',]
+                                        ])->dropDownList([ $List_Branches_Arr, ], ['prompt' => '']) ?>
 
+      <?= $form->field($model, 'dept_name', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
+                                            'labelOptions' => [ 'class' => 'control-label col-sm-3',]
+                                        ])->textInput(['maxlength' => true,'placeholder'=>'Department Name']) ?>
 
-    <?= $form->field($model, 'dept_created_date')->textInput() ?>
+      <?= $form->field($model, 'dept_created_date', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
+                                            'labelOptions' => [ 'class' => 'control-label col-sm-3',]
+                                        ])->textInput(['maxlength' => true,'placeholder'=>'Create Date']) ?>
 
-    <?= $form->field($model, 'dtep_status')->dropDownList([ 'Yes' => 'Yes', 'No' => 'No', ], ['prompt' => '']) ?>
-     <?php
-     /*
-          echo $form->field($model, 'dtep_status')->widget(Select2::classname(), [
-          'data' => [ 'Yes' => 'Yes', 'No' => 'No', ],
-          'language' => 'de',
-          'options' => ['placeholder' => 'Select a Status ...'],
-          'pluginOptions' => [
-              'allowClear' => true
-          ],
-        ]);
-    */
-    ?>
+      <?= $form->field($model, 'dtep_status', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
+                                            'labelOptions' => [ 'class' => 'control-label col-sm-3',]
+                                        ])->dropDownList([ 'Yes' => 'Yes', 'No' => 'No', ], ['prompt' => '']) ?>
 
-    <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary','id'=>'submit_id']) ?>
+       <?php
+       /*
+            echo $form->field($model, 'dtep_status')->widget(Select2::classname(), [
+            'data' => [ 'Yes' => 'Yes', 'No' => 'No', ],
+            'language' => 'de',
+            'options' => ['placeholder' => 'Select a Status ...'],
+            'pluginOptions' => [
+                'allowClear' => true
+            ],
+          ]);
+      */
+      ?>
+
+      <div class="form-group col-sm-12 text-center">
+          <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary','id'=>'submit_id']) ?>
+          <?= Html::a('Cancel', ['/department/'], ['class'=>'btn btn-danger']) ?>
+      </div>
     </div>
 
     <?php ActiveForm::end(); ?>
@@ -94,7 +86,7 @@ use kartik\select2\Select2;
 
 
 <script type="text/javascript">
-
+/*
 
 var url_data = "department/create";
 
@@ -130,5 +122,6 @@ if($('#department-dept_id').val())
     }});
     return false;
   });
+  */
 
 </script>

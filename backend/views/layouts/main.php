@@ -9,7 +9,6 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
-
 use yii\widgets\Pjax;
 
 DashboardAsset::register($this);
@@ -97,7 +96,7 @@ $img_path = Yii::$app->request->baseUrl . '/backend/web';
         <?php
     }
     ?>
-    
+
 <?php $this->endBody() ?>
 </body>
 </html>
@@ -106,7 +105,7 @@ $img_path = Yii::$app->request->baseUrl . '/backend/web';
 <script type="text/javascript">
 
     //  $.widget.bridge('uibutton', $.ui.button);
-    $("#home_id").click({url_link: "./site/index"}, load_data);
+    /*$("#home_id").click({url_link: "./site/index"}, load_data);
     $("#dept_id").click({url_link: "./department"}, load_data);
     $("#branch_id").click({url_link: "branches"}, load_data);
     $("#company_id").click({url_link: "company"}, load_data);
@@ -129,7 +128,7 @@ $img_path = Yii::$app->request->baseUrl . '/backend/web';
             return false;
         }});
       return false;
-  }
+  }*/
 
   $(".menu a").on("click", function(){
      $(".menu").find(".active").removeClass("active");

@@ -45,7 +45,7 @@ class CompanyController extends Controller
         $searchModel = new CompanySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->renderAjax('index', [
+        return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -58,7 +58,7 @@ class CompanyController extends Controller
      */
     public function actionView($id)
     {
-        return $this->renderAjax('view', [
+        return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
     }
@@ -78,7 +78,7 @@ class CompanyController extends Controller
 
         if(!yii::$app->user->can('create company'))
         {
-            return $this->renderAjax('notallowed');
+            return $this->render('notallowed');
             exit;
         }
 
@@ -97,7 +97,7 @@ class CompanyController extends Controller
                         $searchModel = new CompanySearch();
                         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-                        return $this->renderAjax('index', [
+                        return $this->render('index', [
                                 'searchModel' => $searchModel,
                                 'dataProvider' => $dataProvider,
                             ]);
@@ -133,7 +133,7 @@ class CompanyController extends Controller
     {
         if(!yii::$app->user->can('edit company'))
         {
-            return $this->renderAjax('notallowed');
+            return $this->render('notallowed');
             exit;
         }
 
@@ -154,13 +154,13 @@ class CompanyController extends Controller
                         $searchModel = new CompanySearch();
                         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-                        return $this->renderAjax('index', [
+                        return $this->render('index', [
                                 'searchModel' => $searchModel,
                                 'dataProvider' => $dataProvider,
                             ]);
                     }
                     else{
-                           return $this->renderAjax('create', ['model' => $model,]);
+                           return $this->render('create', ['model' => $model,]);
                     // file is uploaded successfully
                     //return;
                 }
@@ -172,7 +172,7 @@ class CompanyController extends Controller
           }
       }
      else {
-            return $this->renderAjax('update', [
+            return $this->render('update', [
                 'model' => $model,
             ]);
         }
@@ -188,7 +188,7 @@ class CompanyController extends Controller
     {
         if(!yii::$app->user->can('delete company'))
         {
-            return $this->renderAjax('notallowed');
+            return $this->render('notallowed');
             exit;
         }
 
@@ -198,7 +198,7 @@ class CompanyController extends Controller
         $searchModel = new CompanySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->renderAjax('index', [
+        return $this->render('index', [
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
             ]);

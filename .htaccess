@@ -1,3 +1,4 @@
+
 Options +FollowSymlinks
 RewriteEngine On
 
@@ -17,7 +18,7 @@ RewriteCond %{REQUEST_URI} ^/advanced/(admin)
 RewriteRule ^.*$ backend/web/index.php [L]
 
 
-RewriteCond %{REQUEST_URI} ^/advanced/(assets|css|js|uploads|plugins|dist)
+RewriteCond %{REQUEST_URI} ^/advanced/(frontend|backend)/web/(assets|css|js|uploads|plugins|dist)
 RewriteRule ^assets/(.*)$ frontend/web/assets/$1 [L]
 RewriteRule ^uploads/(.*)$ frontend/web/uploads/$1 [L]
 RewriteRule ^css/(.*)$ frontend/web/css/$1 [L]
@@ -26,6 +27,7 @@ RewriteRule ^images/(.*)$ frontend/web/images/$1 [L]
 
 RewriteRule ^assets/(.*)$ backend/web/assets/$1 [L]
 RewriteRule ^css/(.*)$ backend/web/css/$1 [L]
+RewriteRule ^uploads/(.*)$ backend/web/uploads/$1 [L]
 RewriteRule ^js/(.*)$ backend/web/js/$1 [L]
 RewriteRule ^fonts/(.*)$ backend/web/fonts/$1 [L]
 RewriteRule ^plugins/(.*)$ backend/web/plugins/$1 [L]

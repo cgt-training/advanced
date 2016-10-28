@@ -43,7 +43,7 @@ class LocationController extends Controller
         $searchModel = new LocationSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->renderAjax('index', ['searchModel' => $searchModel,'dataProvider' => $dataProvider,]);
+        return $this->render('index', ['searchModel' => $searchModel,'dataProvider' => $dataProvider,]);
     }
 
     /**
@@ -53,7 +53,7 @@ class LocationController extends Controller
      */
     public function actionView($id)
     {
-        return $this->renderAjax('view', ['model' => $this->findModel($id),]);
+        return $this->render('view', ['model' => $this->findModel($id),]);
     }
 
     /**
@@ -65,7 +65,7 @@ class LocationController extends Controller
     {
         if(!yii::$app->user->can('create location'))
         {
-            return $this->renderAjax('notallowed');
+            return $this->render('notallowed');
             exit;
         }
 
@@ -76,7 +76,7 @@ class LocationController extends Controller
             $searchModel = new LocationSearch();
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-            return $this->renderAjax('index', ['searchModel' => $searchModel,'dataProvider' => $dataProvider,]);
+            return $this->render('index', ['searchModel' => $searchModel,'dataProvider' => $dataProvider,]);
 
             //return $this->redirect(['view', 'id' => $model->loc_id]);
         } else {
@@ -94,7 +94,7 @@ class LocationController extends Controller
     {
         if(!yii::$app->user->can('edit location'))
         {
-            return $this->renderAjax('notallowed');
+            return $this->render('notallowed');
             exit;
         }
 
@@ -105,12 +105,12 @@ class LocationController extends Controller
             $searchModel = new LocationSearch();
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-            return $this->renderAjax('index', [
+            return $this->render('index', [
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
             ]);
         } else {
-            return $this->renderAjax('update', ['model' => $model,]);
+            return $this->render('update', ['model' => $model,]);
         }
     }
 
@@ -124,7 +124,7 @@ class LocationController extends Controller
     {
         if(!yii::$app->user->can('delete location'))
         {
-            return $this->renderAjax('notallowed');
+            return $this->render('notallowed');
             exit;
         }
 
@@ -133,7 +133,7 @@ class LocationController extends Controller
         $searchModel = new LocationSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->renderAjax('index', ['searchModel' => $searchModel,'dataProvider' => $dataProvider,]);
+        return $this->render('index', ['searchModel' => $searchModel,'dataProvider' => $dataProvider,]);
         //return $this->redirect(['index']);
     }
 

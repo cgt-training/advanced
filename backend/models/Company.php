@@ -23,6 +23,8 @@ class Company extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    public $company_count;
+
     public static function tableName()
     {
         return 'company';
@@ -37,9 +39,12 @@ class Company extends \yii\db\ActiveRecord
             [['c_id', 'c_name', 'c_email', 'c_add', 'c_start_date', 'c_create_date', 'c_status'], 'required'],
             [['c_id'], 'integer'],
             [['c_add', 'c_status'], 'string'],
-            [['c_start_date', 'c_create_date'], 'safe'],
             [['c_name'], 'string', 'max' => 100],
             [['c_email'], 'string', 'max' => 150],
+            // the email attribute should be a valid email address
+            ['c_email', 'email'],
+            ['c_start_date', 'date', 'format' => 'php:Y-m-d H:i:s'],
+            ['c_create_date', 'date', 'format' => 'php:Y-m-d H:i:s'],
         ];
     }
 

@@ -10,18 +10,33 @@ use yii\widgets\ActiveForm;
 
 <div class="location-form">
 
-    <?php $form = ActiveForm::begin(['id' => 'location_form_id','action' => '#','options' => ['enctype' => 'multipart/form-data']]); ?>
+    <?php $form = ActiveForm::begin(['id' => 'location_form_id','options' => ['enctype' => 'multipart/form-data','class'=>'form-horizontal']]); ?>
 
-    <?= $form->field($model, 'loc_id')->textInput() ?>
+    <h1><?= Html::encode($this->title) ?></h1>
 
-    <?= $form->field($model, 'zip_code')->textInput(['maxlength' => true]) ?>
+    <div class="box-body">
 
-    <?= $form->field($model, 'city')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'loc_id', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
+                                            'labelOptions' => [ 'class' => 'control-label col-sm-3',]
+                                        ])->textInput(['maxlength' => true,'placeholder'=>'Location Id']) ?>
 
-    <?= $form->field($model, 'province')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'zip_code', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
+                                            'labelOptions' => [ 'class' => 'control-label col-sm-3',]
+                                        ])->textInput(['maxlength' => true,'placeholder'=>'Zip Code']) ?>
 
-    <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary','id'=>'submit_id']) ?>
+        <?= $form->field($model, 'city', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
+                                            'labelOptions' => [ 'class' => 'control-label col-sm-3',]
+                                        ])->textInput(['maxlength' => true,'placeholder'=>'City']) ?>
+
+        <?= $form->field($model, 'province', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
+                                            'labelOptions' => [ 'class' => 'control-label col-sm-3',]
+                                        ])->textInput(['maxlength' => true,'placeholder'=>'Province']) ?>
+
+        <div class="form-group col-sm-12 text-center">
+            <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary','id'=>'submit_id']) ?>
+            <?= Html::a('Cancel', ['/location/'], ['class'=>'btn btn-danger']) ?>
+        </div>
+
     </div>
 
     <?php ActiveForm::end(); ?>
@@ -29,7 +44,7 @@ use yii\widgets\ActiveForm;
 </div>
 
 <script type="text/javascript">
-
+/*
 var url_data = "location/create";
 
 if($('#location-loc_id').val())
@@ -54,4 +69,5 @@ if($('#location-loc_id').val())
     }});
     return false;
   });
+  */
 </script>

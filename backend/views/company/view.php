@@ -6,17 +6,17 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Company */
 
-$this->title = $model->c_id;
+$this->title = "Detail View for ".$model->c_name;
 $this->params['breadcrumbs'][] = ['label' => 'Companies', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
-$img_path = Yii::$app->request->baseUrl . '/frontend/web/uploads/';
+$img_path = Yii::$app->request->baseUrl . '/backend/web/uploads/';
 ?>
-<div class="company-view">
+<div class="company-view" style="margin:15px;">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1 class="margin-default" style="margin:15px;"><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Index', ['/',], ['class' => 'btn btn-primary','id'=>"company_id"]) ?>
+        <?= Html::a('Back', ['/company',], ['class' => 'btn btn-primary','id'=>"company_id"]) ?>
     </p>
 
     <?= DetailView::widget([
@@ -29,7 +29,6 @@ $img_path = Yii::$app->request->baseUrl . '/frontend/web/uploads/';
             'c_start_date',
             'c_create_date',
             'c_status',
-            'c_logo',
             [
                 'attribute'=>'c_logo',
                 'value'=>$img_path.$model->c_logo,

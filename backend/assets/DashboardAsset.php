@@ -18,6 +18,7 @@ class DashboardAsset extends AssetBundle
                     'plugins/iCheck/flat/blue.css',
                     'plugins/morris/morris.css',
                     'plugins/jvectormap/jquery-jvectormap-1.2.2.css',
+                    'plugins/select2/select2.min.css',
                     'plugins/datepicker/datepicker3.css',
                     'plugins/daterangepicker/daterangepicker.css',
                     'plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css',
@@ -26,12 +27,11 @@ class DashboardAsset extends AssetBundle
                 ];
 
     public $js = [
-                    'plugins/jQuery/jquery-2.2.3.min.js',
                     'js/main.js',
                     'js/bootstrap.min.js',
                     '//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js',
                     'js/jquery-ui.min.js',
-                    'plugins/morris/morris.min.js',
+                    //'plugins/morris/morris.min.js',
                     'plugins/sparkline/jquery.sparkline.min.js',
                     'plugins/jvectormap/jquery-jvectormap-1.2.2.min.js',
                     'plugins/jvectormap/jquery-jvectormap-world-mill-en.js',
@@ -45,6 +45,7 @@ class DashboardAsset extends AssetBundle
                     'dist/js/app.min.js',
                     'dist/js/pages/dashboard.js',
                     'dist/js/demo.js',
+                    'plugins/select2/select2.full.min.js',
                 ];
 
     public $depends = [

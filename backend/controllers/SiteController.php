@@ -6,6 +6,10 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
+use backend\models\Company;
+use backend\models\Branches;
+use backend\models\Department;
+use backend\models\Customer;
 
 /**
  * Site controller
@@ -67,7 +71,44 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        /* Company Count */
+        $Company_Arr = Company::find()
+                            ->select(['COUNT(*) AS company_count'])
+                            ->all();
+
+        $comp_count = $Company_Arr[0]['company_count'];
+
+        /* Branches Count */
+
+        $Branch_Arr = Branches::find()
+                                ->select(['COUNT(*) AS branch_count'])
+                                ->all();
+
+        $bran_count = $Branch_Arr[0]['branch_count'];
+
+        /* Department Count */
+
+        $Dept_Arr = Department::find()
+                                ->select(['COUNT(*) AS department_count'])
+                                ->all();
+
+        //$dept_count = $Dept_Arr->department_count;
+        $dept_count = $Dept_Arr[0]['department_count'];
+
+        /* Customer Count */
+
+        $Cust_Arr = Customer::find()
+                                ->select(['COUNT(*) AS customer_count'])
+                                ->all();
+
+        //$cust_count = $Cust_Arr->customer_count;
+        
+        $cust_count = $Cust_Arr[0]['customer_count'];
+
+        return $this->render('index',
+                                    ['company_count'=>$comp_count,'branch_count'=>$bran_count,
+                                    'department_count'=>$dept_count,'customer_count' => $cust_count,]
+                            );
         //exit;
     }
 
@@ -99,6 +140,24 @@ class SiteController extends Controller
                 'model' => $model,
             ]);
         }
+    }
+
+    public function actionRequestPasswordReset()
+    {
+        $model = new PasswordResetRequestForm();
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            if ($model->sendEmail()) {
+                Yii::$app->session->setFlash('success', 'Check your email for further instructions.');
+
+                return $this->goHome();
+            } else {
+                Yii::$app->session->setFlash('error', 'Sorry, we are unable to reset password for email provided.');
+            }
+        }
+
+        return $this->render('requestPasswordResetToken', [
+            'model' => $model,
+        ]);
     }
 
     /**

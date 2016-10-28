@@ -6,16 +6,16 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Branches */
 
-$this->title = $model->b_id;
+$this->title = "Detail View for ".$model->br_name;
 $this->params['breadcrumbs'][] = ['label' => 'Branches', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="branches-view">
+<div class="branches-view" style="margin:15px;">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1 style="margin:15px;"><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Index', ['/',], ['class' => 'btn btn-primary','id'=>"company_id"]) ?>
+        <?= Html::a('Back', ['/branches',], ['class' => 'btn btn-primary']) ?>
     </p>
 
     <?= DetailView::widget([

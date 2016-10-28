@@ -13,9 +13,9 @@ $this->title = 'Companies';
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
-<div class="company-index">
+<div class="company-index" style="margin-left:15px;">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?= Html::encode('Companies List') ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
      
@@ -23,7 +23,6 @@ $this->params['breadcrumbs'][] = $this->title;
     if (Yii::$app->user->isGuest) {
         $Action_Column_Var = [
                                 ['class' => 'yii\grid\SerialColumn'],
-                                'c_id',
                                 'c_name',
                                 'c_email:email',
                                 'c_add:ntext',
@@ -40,9 +39,9 @@ $this->params['breadcrumbs'][] = $this->title;
             </p>
             <?php
                 Modal::begin([
-                        'header'=>'<h4>Branches</h4>',
+                        //'header'=>'<h5>Companies</h5>',
                         'id'=>'modal',
-                        'size'=>'modal-lg',
+                        'size'=>'modal-md',
                     ]);
                 echo "<div id='modalContent'></div>";
                 Modal::end();
@@ -50,14 +49,13 @@ $this->params['breadcrumbs'][] = $this->title;
           $Action_Column_Var = 
                                 [
                                     ['class' => 'yii\grid\SerialColumn'],
-                                    'c_id',
                                     'c_name',
                                     'c_email:email',
                                     'c_add:ntext',
                                     'c_start_date',
                                     [
                                     'class' => 'yii\grid\ActionColumn',
-                                    'template' => '{view} {update} {delete}',
+                                    /*'template' => '{view} {update} {delete}',
                                     'buttons' => [
                                         'view' => function ($url,$model,$key) {
                                             return Html::a(
@@ -93,10 +91,13 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 ]
                                             );
                                         },
-                                    ],
+                                    ],*/
                                 ]
                             ];
     }
+//echo "<pre>";
+    //print_r($dataProvider);
+    //print_r($searchModel);
 ?>
 
 <?php Pjax::begin(['id'=>'companyPjax']); ?>
@@ -107,10 +108,3 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); ?>
 <?php Pjax::end(); ?></div>
 
-<script type="text/javascript">
-    
-    $('#modalButton').click(function(){
-    $('#modal').modal('show').find('#modalContent').load($(this).attr('value'));
-});
-
-</script>

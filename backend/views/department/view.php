@@ -8,13 +8,13 @@ use yii\jui\DatePicker;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Department */
 
-$this->title = $model->dept_id;
+$this->title = "Detail View for ".$model->dept_name;
 $this->params['breadcrumbs'][] = ['label' => 'Departments', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="department-view">
+<div class="department-view" style="margin:15px;">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1 style="margin:15px;"><?= Html::encode($this->title) ?></h1>
 
     <p>
         <?= Html::a('Index', ['/',], ['class' => 'btn btn-primary','id'=>"company_id"]) ?>

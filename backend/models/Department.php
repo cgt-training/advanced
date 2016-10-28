@@ -22,6 +22,8 @@ class Department extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    public $department_count;
+    
     public static function tableName()
     {
         return 'department';

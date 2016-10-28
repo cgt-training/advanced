@@ -26,7 +26,7 @@ $img_path = Yii::$app->request->baseUrl . '/backend/web';
          <img src=<?=$img_path."/dist/img/user2-160x160.jpg"?> class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Alexander Pierce</p>
+          <p><?php echo strtoupper(Yii::$app->user->identity->username);?></p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
@@ -51,13 +51,13 @@ $img_path = Yii::$app->request->baseUrl . '/backend/web';
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="#"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
+            <li class="active"><?= Html::a("<i class='fa fa-circle-o'></i>Dashboard", ['/site'],['id'=>'company_id']) ?></li>
             <!--<li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>-->
-            <li><?= Html::a("<i class='fa fa-circle-o'></i>Company", ['/#'],['id'=>'company_id']) ?></li>
-            <li><?= Html::a("<i class='fa fa-laptop'></i>Branches", ['#'],['id'=>'branch_id']) ?></li>
-            <li><?= Html::a("<i class='fa fa-table'></i>Department", ['#'],['id'=>'dept_id']) ?></li>
-            <li><?= Html::a("<i class='fa fa-book'></i>Location", ['#'],['id'=>'loc_id']) ?></li>
-            <li><?= Html::a("<i class='fa fa-book'></i>Customer", ['#'],['id'=>'cust_id']) ?></li>
+            <li><?= Html::a("<i class='fa fa-circle-o'></i>Company", ['/company'],['id'=>'company_id']) ?></li>
+            <li><?= Html::a("<i class='fa fa-laptop'></i>Branches", ['/branches'],['id'=>'branch_id']) ?></li>
+            <li><?= Html::a("<i class='fa fa-table'></i>Department", ['/department'],['id'=>'dept_id']) ?></li>
+            <li><?= Html::a("<i class='fa fa-book'></i>Location", ['/location'],['id'=>'loc_id']) ?></li>
+            <li><?= Html::a("<i class='fa fa-book'></i>Customer", ['/customer'],['id'=>'cust_id']) ?></li>
             <li>
             <?php
             if (!Yii::$app->user->isGuest)

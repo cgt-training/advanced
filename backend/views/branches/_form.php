@@ -12,13 +12,14 @@ use kartik\select2\Select2;
 ?>
 
 <div class="branches-form">
+  <h1><?= Html::encode($this->title) ?></h1>
+    <?php $form = ActiveForm::begin(['id' => 'branches_form_id','options' => ['enctype' => 'multipart/form-data','class'=>'form-horizontal']]); ?>
 
-    <?php $form = ActiveForm::begin([
-                                      'id' => 'branches_form_id',
-                                      'action' => '#',
-                                  ]); ?>
+    <div class="box-body">
 
-    <?= $form->field($model, 'b_id')->textInput() ?>
+    <?= $form->field($model, 'b_id', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
+                                            'labelOptions' => [ 'class' => 'control-label col-sm-3',]
+                                        ])->textInput(['maxlength' => true,'placeholder'=>'Branch Id']) ?>
 
     <?php
        /* echo $form->field($model, 'c_id')->widget(Select2::classname(), [
@@ -31,22 +32,35 @@ use kartik\select2\Select2;
       ]);*/
     ?>
 
-    <?= $form->field($model, 'c_id')->dropDownList([ $List_Company_Arr, ], ['prompt' => '']) ?>
+    <?= $form->field($model, 'c_id', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
+                                                    'labelOptions' => [ 'class' => 'control-label col-sm-3']
+                                                ])->dropDownList([ $List_Company_Arr, ], ['prompt' => '','placeholder'=>'Select Company'])?>
 
-    <?= $form->field($model, 'br_name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'br_name', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
+                                            'labelOptions' => [ 'class' => 'control-label col-sm-3']
+                                        ])->textInput(['maxlength' => true,'placeholder'=>'Name']) ?>
 
-    <?= $form->field($model, 'br_address')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'br_address', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
+                                            'labelOptions' => [ 'class' => 'control-label col-sm-3']
+                                        ])->textarea(['rows' => 4,'placeholder'=>'Address']) ?>
 
-    <?= $form->field($model, 'br_created')->textInput() ?>
+    <?= $form->field($model, 'br_created', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
+                                                    'labelOptions' => [ 'class' => 'control-label col-sm-3']
+                                                ])->textInput(['maxlength' => true,'placeholder'=>'Created Date'])?>
 
-    <?= $form->field($model, 'br_status')->dropDownList([ 'Yes' => 'Yes', 'No' => 'No', ], ['prompt' => '']) ?>
+    <?= $form->field($model, 'br_status', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
+                                                'labelOptions' => [ 'class' => 'control-label col-sm-3',]
+                                            ])->dropDownList([ 'Yes' => 'Yes', 'No' => 'No', ], ['prompt' => '','placeholder'=>'Status'])?>
 
-    <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary','id'=>'submit_id']) ?>
+    <div class="form-group col-sm-12 text-center">
+        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+
+        <?= Html::a('Cancel', ['/branches/'], ['class'=>'btn btn-danger']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
 
+</div>
 </div>
 
 <?php
@@ -68,7 +82,7 @@ use kartik\select2\Select2;
 ?>
 
 <script type="text/javascript">
-
+/*
 var url_data = "branches/create";
 
 if($('#branches-b_id').val())
@@ -89,4 +103,5 @@ if($('#branches-b_id').val())
     }});
     return false;
   });
+  */
 </script>

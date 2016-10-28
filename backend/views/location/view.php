@@ -6,23 +6,16 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Location */
 
-$this->title = $model->loc_id;
+$this->title = "Detail View for ".$model->city;
 $this->params['breadcrumbs'][] = ['label' => 'Locations', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="location-view">
+<div class="location-view" style="margin:15px;">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1 style="margin:15px;"><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->loc_id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->loc_id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
+        <?= Html::a('Back', ['/location',], ['class' => 'btn btn-primary']) ?>
     </p>
 
     <?= DetailView::widget([

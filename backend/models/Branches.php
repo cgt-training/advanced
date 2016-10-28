@@ -22,6 +22,9 @@ class Branches extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+
+    public $branch_count;
+    
     public static function tableName()
     {
         return 'branches';

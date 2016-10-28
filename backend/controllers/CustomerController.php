@@ -58,7 +58,7 @@ class CustomerController extends Controller
         $searchModel = new CustomerSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->renderAjax('index', ['searchModel' => $searchModel,'dataProvider' => $dataProvider,]);
+        return $this->render('index', ['searchModel' => $searchModel,'dataProvider' => $dataProvider,]);
     }
 
     /**
@@ -68,7 +68,7 @@ class CustomerController extends Controller
      */
     public function actionView($id)
     {
-        return $this->renderAjax('view', ['model' => $this->findModel($id),]);
+        return $this->render('view', ['model' => $this->findModel($id),]);
     }
 
     /**
@@ -80,7 +80,7 @@ class CustomerController extends Controller
     {
         if(!yii::$app->user->can('create customer'))
         {
-            return $this->renderAjax('notallowed');
+            return $this->render('notallowed');
             exit;
         }
 
@@ -91,7 +91,7 @@ class CustomerController extends Controller
             $searchModel = new CustomerSearch();
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-            return $this->renderAjax('index', ['searchModel' => $searchModel,'dataProvider' => $dataProvider,]);
+            return $this->render('index', ['searchModel' => $searchModel,'dataProvider' => $dataProvider,]);
         } else {
             return $this->renderAjax('create', [
                 'model' => $model,
@@ -110,7 +110,7 @@ class CustomerController extends Controller
     {
         if(!yii::$app->user->can('edit customer'))
         {
-            return $this->renderAjax('notallowed');
+            return $this->render('notallowed');
             exit;
         }
 
@@ -121,9 +121,9 @@ class CustomerController extends Controller
             $searchModel = new CustomerSearch();
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-            return $this->renderAjax('index', ['searchModel' => $searchModel,'dataProvider' => $dataProvider,]);
+            return $this->render('index', ['searchModel' => $searchModel,'dataProvider' => $dataProvider,]);
         } else {
-            return $this->renderAjax('update', ['model' => $model,'List_Location_Arr' => $this->List_Location_Arr,]);
+            return $this->render('update', ['model' => $model,'List_Location_Arr' => $this->List_Location_Arr,]);
         }
     }
 
@@ -137,7 +137,7 @@ class CustomerController extends Controller
     {
         if(!yii::$app->user->can('delete customer'))
         {
-            return $this->renderAjax('notallowed');
+            return $this->render('notallowed');
             exit;
         }
 
@@ -147,7 +147,7 @@ class CustomerController extends Controller
         $searchModel = new CustomerSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->renderAjax('index', ['searchModel' => $searchModel,'dataProvider' => $dataProvider,]);
+        return $this->render('index', ['searchModel' => $searchModel,'dataProvider' => $dataProvider,]);
     }
 
     /**

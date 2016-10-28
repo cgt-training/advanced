@@ -18,6 +18,8 @@ class Customer extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    public $customer_count;
+    
     public static function tableName()
     {
         return 'customer';

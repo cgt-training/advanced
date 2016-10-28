@@ -12,8 +12,6 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="department-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <?= $this->render('_form', [
         'model' => $model,
          'List_Company_Arr' => $List_Company_Arr,

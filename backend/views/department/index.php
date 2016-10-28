@@ -9,10 +9,10 @@ use yii\bootstrap\Modal;
 /* @var $searchModel frontend\models\DepartmentSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Departments';
+$this->title = 'Departments List';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="department-index">
+<div class="department-index" style="margin:15px;">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -24,7 +24,6 @@ $this->params['breadcrumbs'][] = $this->title;
     if (Yii::$app->user->isGuest) {
         $Action_Column_Var = [
                                 ['class' => 'yii\grid\SerialColumn'],
-                                'dept_id',
                                 [
                                     'attribute'=>'c_id',
                                     'value'=>'c.c_name',
@@ -50,9 +49,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
          <?php
             Modal::begin([
-                    'header'=>'<h4>Departments</h4>',
+                    //'header'=>'<h4>Departments</h4>',
                     'id'=>'modal',
-                    'size'=>'modal-lg',
+                    'size'=>'modal-md',
                 ]);
             echo "<div id='modalContent'></div>";
             Modal::end();
@@ -60,7 +59,6 @@ $this->params['breadcrumbs'][] = $this->title;
         $Action_Column_Var =    
                             [
                                 ['class' => 'yii\grid\SerialColumn'],
-                                'dept_id',
                                 [
                                     'attribute'=>'c_id',
                                     'value'=>'c.c_name',
@@ -73,7 +71,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'dept_created_date',
                                 [
                                     'class' => 'yii\grid\ActionColumn',
-                                    'template' => '{view} {update} {delete}',
+                                    /*'template' => '{view} {update} {delete}',
                                     'buttons' => [
                                         'view' => function ($url,$model,$key) {
                                             return 
@@ -110,7 +108,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 ]
                                             );
                                         },
-                                    ],
+                                    ],*/
                                 ]
                             ];
     }
@@ -124,10 +122,3 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => $Action_Column_Var,
     ]); ?>
 <?php Pjax::end(); ?></div>
-
-<script type="text/javascript">
-    $('#modalButton').click(function(){
-    $('#modal').modal('show').find('#modalContent').load($(this).attr('value'));
-});
-
-</script>

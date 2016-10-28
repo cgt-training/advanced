@@ -54,6 +54,9 @@ class PasswordResetRequestForm extends Model
             }
         }
 
+      //  echo Yii::$app->params['supportEmail']."->".Yii::$app->name."=>".$this->email;
+      //  exit;
+
         return Yii::$app
             ->mailer
             ->compose(

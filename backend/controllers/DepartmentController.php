@@ -77,7 +77,7 @@ class DepartmentController extends Controller
         $searchModel = new DepartmentSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->renderAjax('index', [
+        return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -90,7 +90,7 @@ class DepartmentController extends Controller
      */
     public function actionView($id)
     {
-        return $this->renderAjax('view', [
+        return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
     }
@@ -104,7 +104,7 @@ class DepartmentController extends Controller
     {
         if(!yii::$app->user->can('create department'))
         {
-            return $this->renderAjax('notallowed');
+            return $this->render('notallowed');
             exit;
         }
 
@@ -115,7 +115,7 @@ class DepartmentController extends Controller
             $searchModel = new DepartmentSearch();
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-            return $this->renderAjax('index', [
+            return $this->render('index', [
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
             ]);
@@ -138,7 +138,7 @@ class DepartmentController extends Controller
     {
         if(!yii::$app->user->can('edit department'))
         {
-            return $this->renderAjax('notallowed');
+            return $this->render('notallowed');
             exit;
         }
 
@@ -148,12 +148,12 @@ class DepartmentController extends Controller
             $searchModel = new DepartmentSearch();
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-            return $this->renderAjax('index', [
+            return $this->render('index', [
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
             ]);
         } else {
-            return $this->renderAjax('update', [
+            return $this->render('update', [
                 'model' => $model,
                 'List_Company_Arr' => $this->List_Company_Arr,
                 'List_Branches_Arr' => $this->List_Branches_Arr,
@@ -171,7 +171,7 @@ class DepartmentController extends Controller
     {
         if(!yii::$app->user->can('delete department'))
         {
-            return $this->renderAjax('notallowed');
+            return $this->render('notallowed');
             exit;
         }
 
@@ -180,7 +180,7 @@ class DepartmentController extends Controller
         $searchModel = new DepartmentSearch();
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-            return $this->renderAjax('index', [
+            return $this->render('index', [
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
             ]);

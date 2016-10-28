@@ -56,7 +56,7 @@ class BranchesController extends Controller
         $searchModel = new BranchesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->renderAjax('index', [
+        return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -69,7 +69,7 @@ class BranchesController extends Controller
      */
     public function actionView($id)
     {
-        return $this->renderAjax('view', ['model' => $this->findModel($id),]);
+        return $this->render('view', ['model' => $this->findModel($id),]);
     }
 
     /**
@@ -82,7 +82,7 @@ class BranchesController extends Controller
         //$this->layout = '';
         if(!yii::$app->user->can('create branch'))
         {
-            return $this->renderAjax('notallowed');
+            return $this->render('notallowed');
             exit;
         }
 
@@ -92,7 +92,7 @@ class BranchesController extends Controller
             $searchModel = new BranchesSearch();
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-            return $this->renderAjax('index', [
+            return $this->render('index', [
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
             ]);
@@ -132,13 +132,13 @@ class BranchesController extends Controller
                 $searchModel = new BranchesSearch();
                 $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-                return $this->renderAjax('index', [
+                return $this->render('index', [
                     'searchModel' => $searchModel,
                     'dataProvider' => $dataProvider,
                 ]);
             }
         } else {
-            return $this->renderAjax('update', [
+            return $this->render('update', [
                 'model' => $model,
                 'List_Company_Arr'=>$this->List_Company_Arr,
             ]);
@@ -167,7 +167,7 @@ class BranchesController extends Controller
         $searchModel = new BranchesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->renderAjax('index', [
+        return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
