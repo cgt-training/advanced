@@ -11,6 +11,7 @@ $this->title = 'Login';
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
 <body class="hold-transition login-page">
+<h2><?= Yii::$app->session->getFlash('response_msg'); ?></h2>
     <div class="login-box">
       <div class="login-logo">
         <a href="#"><b>Admin</b>LTE</a>

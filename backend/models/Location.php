@@ -17,6 +17,7 @@ class Location extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+
     public static function tableName()
     {
         return 'location';
@@ -30,10 +31,10 @@ class Location extends \yii\db\ActiveRecord
         return [
             [['loc_id', 'zip_code', 'city', 'province'], 'required'],
             [['loc_id'], 'integer'],
-            [['zip_code'], 'string', 'max' => 50],
+            [['zip_code'], 'integer'],
+            [['zip_code'], 'unique', 'message'=>"Email already exists "],
             [['city'], 'string', 'max' => 100],
             [['province'], 'string', 'max' => 150],
-            [['zip_code'], 'unique'],
         ];
     }
 

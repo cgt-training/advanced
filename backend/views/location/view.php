@@ -10,9 +10,9 @@ $this->title = "Detail View for ".$model->city;
 $this->params['breadcrumbs'][] = ['label' => 'Locations', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="location-view" style="margin:15px;">
+<div class="location-view" style="width:50%;margin:0 auto;">
 
-    <h1 style="margin:15px;"><?= Html::encode($this->title) ?></h1>
+    <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
         <?= Html::a('Back', ['/location',], ['class' => 'btn btn-primary']) ?>

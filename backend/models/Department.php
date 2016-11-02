@@ -36,7 +36,6 @@ class Department extends \yii\db\ActiveRecord
     {
         return [
             [['dept_id', 'b_id', 'dept_name', 'c_id', 'dept_created_date', 'dtep_status'], 'required'],
-            [['dept_id', 'b_id', 'c_id'], 'integer'],
             [['dept_created_date'], 'safe'],
             [['dtep_status'], 'string'],
             [['dept_name'], 'string', 'max' => 100],
@@ -68,10 +67,20 @@ class Department extends \yii\db\ActiveRecord
         return $this->hasOne(Company::className(), ['c_id' => 'c_id']);
     }
 
+    public function getCompany()
+    {
+        return $this->hasOne(Company::className(), ['c_id' => 'c_id']);
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */
     public function getB()
+    {
+        return $this->hasOne(Branches::className(), ['b_id' => 'b_id']);
+    }
+
+    public function getBranch()
     {
         return $this->hasOne(Branches::className(), ['b_id' => 'b_id']);
     }

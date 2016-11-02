@@ -58,7 +58,10 @@ class CustomerController extends Controller
         $searchModel = new CustomerSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', ['searchModel' => $searchModel,'dataProvider' => $dataProvider,]);
+        $Customer_Arr = Customer::find()->orderBy('cust_name')
+                              ->all();
+
+        return $this->render('index', ['searchModel' => $searchModel,'dataProvider' => $dataProvider,'Customer_Arr'=>$Customer_Arr,]);
     }
 
     /**
@@ -88,10 +91,10 @@ class CustomerController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             //return $this->redirect(['view', 'id' => $model->cust_id]);
-            $searchModel = new CustomerSearch();
-            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+            //$searchModel = new CustomerSearch();
+            //$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-            return $this->render('index', ['searchModel' => $searchModel,'dataProvider' => $dataProvider,]);
+            return $this->redirect('index');
         } else {
             return $this->renderAjax('create', [
                 'model' => $model,
@@ -118,10 +121,10 @@ class CustomerController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             //return $this->redirect(['view', 'id' => $model->cust_id]);
-            $searchModel = new CustomerSearch();
-            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+            //$searchModel = new CustomerSearch();
+            //$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-            return $this->render('index', ['searchModel' => $searchModel,'dataProvider' => $dataProvider,]);
+            return $this->redirect('index');
         } else {
             return $this->render('update', ['model' => $model,'List_Location_Arr' => $this->List_Location_Arr,]);
         }
@@ -144,8 +147,10 @@ class CustomerController extends Controller
         $this->findModel($id)->delete();
 
         //return $this->redirect(['index']);
-        $searchModel = new CustomerSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        //$searchModel = new CustomerSearch();
+        //$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->redirect('index');
 
         return $this->render('index', ['searchModel' => $searchModel,'dataProvider' => $dataProvider,]);
     }

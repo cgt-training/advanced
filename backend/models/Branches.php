@@ -36,7 +36,7 @@ class Branches extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['b_id', 'c_id', 'br_name', 'br_address', 'br_created', 'br_status'], 'required'],
+            [['b_id', 'c_id', 'br_name', 'br_address'/*, 'br_created'*/, 'br_status'], 'required'],
             [['b_id', 'c_id'], 'integer'],
             [['br_address', 'br_status'], 'string'],
             [['br_created'], 'safe'],
@@ -64,6 +64,11 @@ class Branches extends \yii\db\ActiveRecord
      * @return \yii\db\ActiveQuery
      */
     public function getC()
+    {
+        return $this->hasOne(Company::className(), ['c_id' => 'c_id']);
+    }
+
+    public function getCompany()
     {
         return $this->hasOne(Company::className(), ['c_id' => 'c_id']);
     }

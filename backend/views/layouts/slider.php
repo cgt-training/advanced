@@ -53,15 +53,17 @@ $img_path = Yii::$app->request->baseUrl . '/backend/web';
           <ul class="treeview-menu">
             <li class="active"><?= Html::a("<i class='fa fa-circle-o'></i>Dashboard", ['/site'],['id'=>'company_id']) ?></li>
             <!--<li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>-->
-            <li><?= Html::a("<i class='fa fa-circle-o'></i>Company", ['/company'],['id'=>'company_id']) ?></li>
+            <li><?= Html::a("<i class='fa fa-users'></i>User", ['/user'],['id'=>'user_id']) ?></li>
+            <li><?= Html::a("<i class='fa fa-home'></i>Company", ['/company'],['id'=>'company_id']) ?></li>
             <li><?= Html::a("<i class='fa fa-laptop'></i>Branches", ['/branches'],['id'=>'branch_id']) ?></li>
             <li><?= Html::a("<i class='fa fa-table'></i>Department", ['/department'],['id'=>'dept_id']) ?></li>
-            <li><?= Html::a("<i class='fa fa-book'></i>Location", ['/location'],['id'=>'loc_id']) ?></li>
-            <li><?= Html::a("<i class='fa fa-book'></i>Customer", ['/customer'],['id'=>'cust_id']) ?></li>
+            <li><?= Html::a("<i class='fa fa-location-arrow'></i>Location", ['/location'],['id'=>'loc_id']) ?></li>
+            <li><?= Html::a("<i class='fa fa-user'></i>Customer", ['/customer'],['id'=>'cust_id']) ?></li>
+            <li><?= Html::a("<i class='fa fa-book'></i>Roles & Permissions", ['/auth-item'],['id'=>'role_id']) ?></li>
             <li>
             <?php
             if (!Yii::$app->user->isGuest)
-              echo Html::a('<i class="fa fa-circle-o text-red"></i>Logout (' . Yii::$app->user->identity->username . ')', ['/site/logout'],['style'=>'color:#fff;']);
+              echo Html::a('<i class="fa fa-power-off" text-red"></i>Logout (' . Yii::$app->user->identity->username . ')', ['/site/logout']);
             ?>
             </li>
           </ul>

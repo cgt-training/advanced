@@ -10,6 +10,7 @@ use backend\models\DepartmentSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
 
 /**
  * DepartmentController implements the CRUD actions for Department model.
@@ -47,16 +48,11 @@ class DepartmentController extends Controller
         $Companies = $query->orderBy('c_name')
                             ->all();
 
-        foreach ($Companies as $Company_sub_arr):
-            $this->List_Company_Arr[$Company_sub_arr->c_id] = $Company_sub_arr->c_name;
-        endforeach;
-
         $Branches = $query1->orderBy('br_name')
                             ->all();
 
-        foreach ($Branches as $Branch_sub_arr):
-            $this->List_Branches_Arr[$Branch_sub_arr->b_id] = $Branch_sub_arr->br_name;
-        endforeach;
+        $this->List_Company_Arr = ArrayHelper::map($Companies,'c_id','c_name');
+        $this->List_Branches_Arr = ArrayHelper::map($Branches,'b_id','br_name');
     }
 
     /**
@@ -65,21 +61,28 @@ class DepartmentController extends Controller
      */
     public function actionIndex()
     {
-        $Send_Mail = Yii::$app->mailer->compose()
+        /*$Send_Mail = Yii::$app->mailer->compose()
                          ->setFrom('pankajsharma55@gmail.com')
                          ->setTo('pankaj.sharma@cgt.co.in')
                          ->setSubject('Testing Mail...')
                          ->setTextBody('Plain text content')
                          ->setHtmlBody('<b>HTML content</b>')
                          ->send();
-
+        */
         
         $searchModel = new DepartmentSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        $Department_Arr = Department::find()->orderBy('dept_name')
+                                            ->joinWith('branch')
+                                            ->joinWith('company')
+                                            ->all();
+                                            
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'Department_Arr' => $Department_Arr,
         ]);
     }
 
@@ -110,15 +113,28 @@ class DepartmentController extends Controller
 
         $model = new Department();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            //return $this->redirect(['view', 'id' => $model->dept_id]);
-            $searchModel = new DepartmentSearch();
-            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        if ($model->load(Yii::$app->request->post())) {
 
-            return $this->render('index', [
-                'searchModel' => $searchModel,
-                'dataProvider' => $dataProvider,
-            ]);
+            $command = (new \yii\db\Query())
+                                ->select(['MAX(dept_id)+1 as D_Max_Id'])
+                                ->from('department')
+                                ->createCommand();
+
+            // returns all rows of the query result
+            $rows = $command->queryAll();
+            $model->dept_id = $rows[0]['D_Max_Id'];
+            $model->dept_created_date = date('Y-m-d H:i:s');
+
+            if(!$model->save()){
+                \Yii::$app->getSession()->setFlash('response_msg', 'Record not saved..');
+            }
+            //return $this->redirect(['view', 'id' => $model->dept_id]);
+            //$searchModel = new DepartmentSearch();
+            //$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+            \Yii::$app->getSession()->setFlash('response_msg', 'Record Saved Successful..');
+
+            return $this->redirect('index');
         } else {
             return $this->renderAjax('create', [
                 'model' => $model,
@@ -145,13 +161,12 @@ class DepartmentController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $searchModel = new DepartmentSearch();
-            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+            //$searchModel = new DepartmentSearch();
+            //$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-            return $this->render('index', [
-                'searchModel' => $searchModel,
-                'dataProvider' => $dataProvider,
-            ]);
+            \Yii::$app->getSession()->setFlash('response_msg', 'Record Updated successfully..');
+            return $this->redirect('index');
+
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -177,13 +192,12 @@ class DepartmentController extends Controller
 
         $this->findModel($id)->delete();
 
-        $searchModel = new DepartmentSearch();
-            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        //$searchModel = new DepartmentSearch();
+        //$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-            return $this->render('index', [
-                'searchModel' => $searchModel,
-                'dataProvider' => $dataProvider,
-            ]);
+        \Yii::$app->getSession()->setFlash('response_msg', 'Record deleted successfully..');
+
+        return $this->redirect('index');
     }
 
     public function actionGetbranch($Company_Id = null)

@@ -56,9 +56,15 @@ class BranchesController extends Controller
         $searchModel = new BranchesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        $Branches_Arr = Branches::find()->select(['branches.*','company.c_name'])
+                                        ->orderBy('br_name')
+                                        ->joinWith('company')
+                                        ->all();
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'Branches_Arr' => $Branches_Arr,
         ]);
     }
 
@@ -86,17 +92,26 @@ class BranchesController extends Controller
             exit;
         }
 
-        $model = new Branches();
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            //return $this->redirect(['view', 'id' => $model->b_id]);
-            $searchModel = new BranchesSearch();
-            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-            return $this->render('index', [
-                'searchModel' => $searchModel,
-                'dataProvider' => $dataProvider,
-            ]);
-            exit;
+        $model = new Branches();
+
+        if ($model->load(Yii::$app->request->post())) {
+
+             $command = (new \yii\db\Query())
+                            ->select(['MAX(b_id)+1 as Max_Id'])
+                            ->from('branches')
+                            ->createCommand();
+
+            // returns all rows of the query result
+            $rows = $command->queryAll();
+            
+            $model->b_id = $rows[0]['Max_Id'];
+            $model->br_created = date('Y-m-d H:i:s');
+
+            if(!$model->save()){
+            }
+
+            return $this->redirect(['index',]);
             //return $this->renderAjax('index');
             //exit;
         } else {
@@ -129,13 +144,10 @@ class BranchesController extends Controller
                 //$model = new Branches();
 
                 //return $this->redirect(['index']);
-                $searchModel = new BranchesSearch();
-                $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+                //$searchModel = new BranchesSearch();
+                //$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-                return $this->render('index', [
-                    'searchModel' => $searchModel,
-                    'dataProvider' => $dataProvider,
-                ]);
+                return $this->redirect(['index',]);
             }
         } else {
             return $this->render('update', [
@@ -164,13 +176,10 @@ class BranchesController extends Controller
         $model = new Branches();
 
         //return $this->redirect(['index']);
-        $searchModel = new BranchesSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        //$searchModel = new BranchesSearch();
+        //$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+        return $this->redirect(['index',]);
     }
 
     /**

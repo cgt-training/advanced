@@ -8,10 +8,12 @@ RewriteRule ^admin/assets/(.*)$ backend/web/assets/$1 [L]
 RewriteRule ^admin/css/(.*)$ backend/web/css/$1 [L]
 RewriteRule ^admin/fonts/(.*)$ backend/web/fonts/$1 [L]
 RewriteRule ^admin/js/(.*)$ backend/web/js/$1 [L]
+RewriteRule ^admin/plugins/(.*)$ backend/web/plugins/$1 [L]
 RewriteRule ^admin/dist/(.*)$ backend/web/dist/$1 [L]
 RewriteRule ^admin/backend/web/dist/img(.*)$ backend/web/dist/img/$1 [L]
 RewriteRule ^admin/plugins/(.*)$ backend/web/plugins/$1 [L]
 RewriteRule ^admin/site/(.*)$ admin/$1 [L]
+RewriteRule ^admin/uploads/(.*)$ backend/web/uploads/$1 [L]
 
 RewriteCond %{REQUEST_URI} !^/advanced/backend/web/(assets|css|js|fonts|dist|plugins)/
 RewriteCond %{REQUEST_URI} ^/advanced/(admin)
@@ -20,6 +22,8 @@ RewriteRule ^.*$ backend/web/index.php [L]
 
 RewriteCond %{REQUEST_URI} ^/advanced/(frontend|backend)/web/(assets|css|js|uploads|plugins|dist)
 RewriteRule ^assets/(.*)$ frontend/web/assets/$1 [L]
+RewriteRule ^assets/6b263fdf/(.*)$ frontend/web/assets/6b263fdf/$1 [L]
+RewriteRule ^assets/39c6fc4/(.*)$ frontend/web/assets/39c6fc4/$1 [L]
 RewriteRule ^uploads/(.*)$ frontend/web/uploads/$1 [L]
 RewriteRule ^css/(.*)$ frontend/web/css/$1 [L]
 RewriteRule ^js/(.*)$ frontend/web/js/$1 [L]

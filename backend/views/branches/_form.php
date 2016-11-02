@@ -9,17 +9,15 @@ use kartik\select2\Select2;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Branches */
 /* @var $form yii\widgets\ActiveForm */
+$Style_Var = $model->isNewRecord ? 'width:100%; margin:0 auto;' : 'width:50%; margin:0 auto;';
+$Title_Val = $model->isNewRecord ? '' : "<h1>".Html::encode($this->title)."</h1>";
 ?>
 
-<div class="branches-form">
-  <h1><?= Html::encode($this->title) ?></h1>
+<div class="branches-form" style="<?=$Style_Var;?>">
+    <?= $Title_Val ?>
     <?php $form = ActiveForm::begin(['id' => 'branches_form_id','options' => ['enctype' => 'multipart/form-data','class'=>'form-horizontal']]); ?>
 
     <div class="box-body">
-
-    <?= $form->field($model, 'b_id', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
-                                            'labelOptions' => [ 'class' => 'control-label col-sm-3',]
-                                        ])->textInput(['maxlength' => true,'placeholder'=>'Branch Id']) ?>
 
     <?php
        /* echo $form->field($model, 'c_id')->widget(Select2::classname(), [
@@ -30,11 +28,16 @@ use kartik\select2\Select2;
             'allowClear' => true
         ],
       ]);*/
+      //echo "<pre>";
+      //print_r($List_Company_Arr);
+
+      echo Html::hiddenInput('b_id', '');
+      echo Html::hiddenInput('br_created', date('Y-m-d H:i:s'));
     ?>
 
     <?= $form->field($model, 'c_id', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
                                                     'labelOptions' => [ 'class' => 'control-label col-sm-3']
-                                                ])->dropDownList([ $List_Company_Arr, ], ['prompt' => '','placeholder'=>'Select Company'])?>
+                                                ])->dropDownList($List_Company_Arr, ['prompt' => 'Select Company','class'=>'form-control select2','style'=>"width: 100%;"])?>
 
     <?= $form->field($model, 'br_name', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
                                             'labelOptions' => [ 'class' => 'control-label col-sm-3']
@@ -44,13 +47,9 @@ use kartik\select2\Select2;
                                             'labelOptions' => [ 'class' => 'control-label col-sm-3']
                                         ])->textarea(['rows' => 4,'placeholder'=>'Address']) ?>
 
-    <?= $form->field($model, 'br_created', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
-                                                    'labelOptions' => [ 'class' => 'control-label col-sm-3']
-                                                ])->textInput(['maxlength' => true,'placeholder'=>'Created Date'])?>
-
     <?= $form->field($model, 'br_status', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
                                                 'labelOptions' => [ 'class' => 'control-label col-sm-3',]
-                                            ])->dropDownList([ 'Yes' => 'Yes', 'No' => 'No', ], ['prompt' => '','placeholder'=>'Status'])?>
+                                            ])->dropDownList([ 'Yes' => 'Yes', 'No' => 'No', ], ['prompt' => 'Select Staus','class'=>'form-control select2','style'=>"width: 100%;"])?>
 
     <div class="form-group col-sm-12 text-center">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
@@ -63,23 +62,7 @@ use kartik\select2\Select2;
 </div>
 </div>
 
-<?php
-    $form = ActiveForm::begin();
-    $form->field($model, 'br_created')->widget(DatePicker::className(),[
-   'name' => 'br_created',
-   'language' => 'en-GB',
-   'dateFormat' => 'yyyy-MM-dd',
-   'options' => [
-      'changeMonth' => true,
-      'changeYear' => true,
-      'yearRange' => '1996:2099',
-      'showOn' => 'button',
-      'buttonImage' => 'images/calendar.gif',
-      'buttonImageOnly' => true,
-      'buttonText' => 'Select date'
-    ],
-]) 
-?>
+<?= $this->registerJs("$('.select2').select2();");?>
 
 <script type="text/javascript">
 /*

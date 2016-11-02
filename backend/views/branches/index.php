@@ -15,94 +15,32 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="branches-index" id='branch-index' style="margin:15px;">
-
+    <h2><?= Yii::$app->session->getFlash('response_msg'); ?></h2>
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    
-<?php
-    if (Yii::$app->user->isGuest) {
-        $Action_Column_Var = [
-                                ['class' => 'yii\grid\SerialColumn'],
-                                'br_name',
-                                [
-                                    'attribute'=>'c_id',
-                                    'value'=>'c.c_name',
-                                ],
-                                'br_address:ntext',
-                                'br_created',
-                            ];   
-    }
-    else{
-        ?>
-            <p>
-                <?php 
-                    /*Html::a('Create Branches', ['create'], ['class' => 'btn btn-success']) */
-                ?>
-                <?= Html::button('Create Branches', ['value'=>Url::toRoute('branches/create'), 'class' => 'btn btn-success', 
-                                                        'id'=>'modalButton' ]) ?>
-            </p>
+     <p>
+          <?= Html::button('Create Branches', ['value'=>Url::toRoute('branches/create'), 'class' => 'btn btn-success', 
+                                                  'id'=>'modalButton' ]) ?>
+      </p>
+    <?php // echo $this->render('_search', ['model' => $searchModel]); 
 
-            <?php
                 Modal::begin([
-                        //'header'=>'<h4>Branches</h4>',
+                        'header'=>'<h3>Create Branch</h3>',
                         'id'=>'modal',
                         'size'=>'modal-md',
                     ]);
                 echo "<div id='modalContent'></div>";
                 Modal::end();
-           
+/*           
         $Action_Column_Var = [
                                     ['class' => 'yii\grid\SerialColumn'],
                                     'br_name',
-                                    [
-                                        'attribute'=>'c_id',
-                                        'value'=>'c.c_name',
-                                    ],
+                                    ['attribute'=>'c_id','value'=>'c.c_name',],
                                     'br_address:ntext',
                                     'br_created',
-                                    [
-                                    'class' => 'yii\grid\ActionColumn',
-                                    /*'template' => '{view} {update} {delete}',
-                                    'buttons' => [
-                                        'view' => function ($url,$model,$key) {
-                                            return Html::a(
-                                                '<i class="fa fa-pencil-square-o fa-5"></i>',
-                                                '#', 
-                                                [
-                                                    'title' => 'View',
-                                                    'data-pjax' => '0',
-                                                    'onclick' => "load_data_new('branches/view/?id=".$key."')",
-                                                ]
-                                            );
-                                        },
-                                        'update' => function ($url,$model,$key) {
-                                            return Html::a(
-                                                '<i class="fa fa-eye fa-3"></i>',
-                                                '#', 
-                                                [
-                                                    'title' => 'Update',
-                                                    'data-pjax' => '0',
-                                                    'onclick' => "load_data_new('branches/update/?id=".$key."')",
-                                                ]
-                                            );
-                                        },
-                                        'delete' => function ($url,$model,$key) {
-                                            return Html::a(
-                                                '<i class="fa fa-trash fa-3"></i>',
-                                                '#', 
-                                                [
-                                                    'title' => 'Delete',
-                                                    'data-pjax' => '0',
-                                                    'data-confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
-                                                    'onclick' => "load_data_new('branches/delete/?id=".$key."')",
-                                                ]
-                                            );
-                                        },
-                                    ],*/
-                                ],
+                                    ['class' => 'yii\grid\ActionColumn',],
                             ];
-    }
+    
 ?>
 <?php Pjax::begin(['id' => 'branchPjax']); ?>    
 <?= GridView::widget([
@@ -111,4 +49,74 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => $Action_Column_Var,
     ]); ?>
 
-<?php Pjax::end(); ?></div>
+<?php Pjax::end(); */?>
+
+<div class="box">
+    <!-- /.box-header -->
+    <div class="box-body">
+      <table id="branch_table" class="table table-bordered table-striped">
+        <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Branch Name</th>
+          <th>Company</th>
+          <th>Address</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php
+
+        $iSrno = 1;
+
+        foreach ($Branches_Arr as $key => $Branch_Sub_Arr) {
+          ?>
+            <tr>
+              <td><?=$iSrno++;?></td>
+              <td><?=$Branch_Sub_Arr->br_name;?></td>
+              <td><?=$Branch_Sub_Arr['company']->c_name;?></td>
+              <td><?=$Branch_Sub_Arr->br_address;?></td>
+              <td>
+              <?php
+                  echo Html::a('<i class="glyphicon glyphicon-eye-open"></i>', ['/branches/view/','id'=>$Branch_Sub_Arr->b_id]);
+                  echo "&nbsp;&nbsp;";
+                  echo Html::a('<i class="glyphicon glyphicon-pencil"></i>', ['/branches/update/','id'=>$Branch_Sub_Arr->b_id]);
+                  echo "&nbsp;&nbsp;";
+                  echo Html::a('<span class="glyphicon glyphicon-trash"></span>', ['/branches/delete', 'id' => $Branch_Sub_Arr->b_id], [
+                          'class' => '',
+                          'data' => [
+                              'confirm' => 'Are you sure ? want to delete.',
+                              'method' => 'post',
+                          ],
+                      ]);
+                  ?>
+                  </td>
+                </tr>
+              <?php
+        }
+        ?>
+        </tbody>
+        <tfoot>
+        </tfoot>
+      </table>
+    </div>
+<!-- /.box-body -->
+</div>
+
+</div>
+
+
+<?= $this->registerJsFile('@Pluginpath/datatables/jquery.dataTables.min.js',['depends' => [yii\web\JqueryAsset::className()]]);?>
+<?= $this->registerJsFile('@Pluginpath/datatables/dataTables.bootstrap.min.js',['depends' => [yii\web\JqueryAsset::className()]]);?>
+
+<?= $this->registerJs("
+  $(function () {
+    $('#branch_table').DataTable({
+      'paging': true,
+      'lengthChange': false,
+      'searching': false,
+      'ordering': true,
+      'info': true,
+      'autoWidth': false
+    });
+  });");?>

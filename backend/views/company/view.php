@@ -9,9 +9,9 @@ use yii\widgets\DetailView;
 $this->title = "Detail View for ".$model->c_name;
 $this->params['breadcrumbs'][] = ['label' => 'Companies', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
-$img_path = Yii::$app->request->baseUrl . '/backend/web/uploads/';
+$img_path = Yii::$app->request->baseUrl . '/uploads/';
 ?>
-<div class="company-view" style="margin:15px;">
+<div class="company-view" style="width:70%;margin:0 auto;">
 
     <h1 class="margin-default" style="margin:15px;"><?= Html::encode($this->title) ?></h1>
 
@@ -38,25 +38,3 @@ $img_path = Yii::$app->request->baseUrl . '/backend/web/uploads/';
     ]) ?>
 
 </div>
-
-
-<script type="text/javascript">
-
-  $("#company_id").click({url_link: "company"}, load_data);
-
-  // in your function, just grab the event object and go crazy...
-  function load_data(event){
-      //var url = event.data.url;
-      $.ajax({
-            url: event.data.url_link, 
-            type:"post",
-
-           success: function(result){
-            //$.pjax.reload({ container: '#pjax_main_container'});
-            $("#pjax_main_container").html(result);
-            return false;
-        }});
-      return false;
-  }
-
-</script>

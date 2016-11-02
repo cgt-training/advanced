@@ -20,7 +20,8 @@
         "yiisoft/yii2-swiftmailer": "*",
         "yiisoft/yii2-jui": "*",
         "kartik-v/yii2-widget-select2": "^2.0",
-        "kartik-v/dependent-dropdown": "dev-master"
+        "kartik-v/dependent-dropdown": "dev-master",
+        "wbraganca/yii2-dynamicform": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

@@ -72,42 +72,38 @@ class SiteController extends Controller
     public function actionIndex()
     {
         /* Company Count */
-        $Company_Arr = Company::find()
-                            ->select(['COUNT(*) AS company_count'])
-                            ->all();
+        $Company_Arr = Company::find()->all();
 
-        $comp_count = $Company_Arr[0]['company_count'];
+        $comp_count = count($Company_Arr);
 
         /* Branches Count */
 
-        $Branch_Arr = Branches::find()
-                                ->select(['COUNT(*) AS branch_count'])
-                                ->all();
+        $Branch_Arr = Branches::find()->all();
 
-        $bran_count = $Branch_Arr[0]['branch_count'];
+        $bran_count = count($Branch_Arr);
 
         /* Department Count */
 
-        $Dept_Arr = Department::find()
-                                ->select(['COUNT(*) AS department_count'])
-                                ->all();
+        $Dept_Arr = Department::find()->all();
 
         //$dept_count = $Dept_Arr->department_count;
-        $dept_count = $Dept_Arr[0]['department_count'];
+        $dept_count = count($Dept_Arr);
 
         /* Customer Count */
 
-        $Cust_Arr = Customer::find()
-                                ->select(['COUNT(*) AS customer_count'])
-                                ->all();
+        $Cust_Arr = Customer::find()->all();
 
         //$cust_count = $Cust_Arr->customer_count;
         
-        $cust_count = $Cust_Arr[0]['customer_count'];
+        $cust_count = count($Cust_Arr);
 
         return $this->render('index',
-                                    ['company_count'=>$comp_count,'branch_count'=>$bran_count,
-                                    'department_count'=>$dept_count,'customer_count' => $cust_count,]
+                                    [
+                                        'Company_Arr'=>$Company_Arr,'company_count'=>$comp_count,
+                                        'Branch_Arr' => $Branch_Arr, 'branch_count'=>$bran_count,
+                                        'Dept_Arr'=>$Dept_Arr, 'department_count'=>$dept_count,
+                                        'Cust_Arr'=>$Cust_Arr, 'customer_count' => $cust_count,
+                                    ]
                             );
         //exit;
     }
@@ -132,6 +128,7 @@ class SiteController extends Controller
             }
             else
             {
+                \Yii::$app->getSession()->setFlash('response_msg', 'You are not allowed to access this page..');
                 Yii::$app->user->logout();
                 return $this->goHome();
             }

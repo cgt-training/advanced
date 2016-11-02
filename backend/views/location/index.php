@@ -11,23 +11,13 @@ use yii\bootstrap\Modal;
 
 $this->title = 'Locations List';
 $this->params['breadcrumbs'][] = $this->title;
+
+
 ?>
 <div class="location-index" style="margin:15px;">
-
+    <h2><?= Yii::$app->session->getFlash('response_msg'); ?></h2>
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <?php
-    if (Yii::$app->user->isGuest) {
-        $Action_Column_Var = [
-                                ['class' => 'yii\grid\SerialColumn'],
-                                'zip_code',
-                                'city',
-                                'province',
-                            ];
-    }
-    else{
-        ?>
             <p>
                 <?php 
                     /*Html::a('Create Company', ['create'], ['class' => 'btn btn-success']) */?>
@@ -36,61 +26,22 @@ $this->params['breadcrumbs'][] = $this->title;
             </p>
             <?php
                 Modal::begin([
-                        //'header'=>'<h4>Location</h4>',
+                        'header'=>'<h3>Create Location</h3>',
                         'id'=>'modal',
                         'size'=>'modal-md',
                     ]);
                 echo "<div id='modalContent'></div>";
                 Modal::end();
           
-          $Action_Column_Var = 
+         /* $Action_Column_Var = 
                                 [
                                     ['class' => 'yii\grid\SerialColumn'],
                                     'zip_code',
                                     'city',
                                     'province',
-                                    [
-                                    'class' => 'yii\grid\ActionColumn',
-                                    /*'template' => '{view} {update} {delete}',
-                                    'buttons' => [
-                                        'view' => function ($url,$model,$key) {
-                                            return Html::a(
-                                                '<i class="fa fa-eye fa-3"></i>',
-                                                '#',
-                                                [
-                                                    'title' => 'View',
-                                                    'data-pjax' => '0',
-                                                    'onclick' => "load_data_new('location/view/?id=".$key."');return false;",
-                                                ]
-                                            );
-                                        },
-                                        'update' => function ($url,$model,$key) {
-                                            return Html::a(
-                                                '<i class="fa fa-pencil-square-o fa-3"></i>',
-                                                '#', 
-                                                [
-                                                    'title' => 'Update',
-                                                    'data-pjax' => '0',
-                                                    'onclick' => "load_data_new('location/update/?id=".$key."');return false;",
-                                                ]
-                                            );
-                                        },
-                                        'delete' => function ($url,$model,$key) {
-                                            return Html::a(
-                                                '<i class="fa fa-trash fa-3"></i>',
-                                                '#', 
-                                                [
-                                                    'title' => 'Delete',
-                                                    'data-pjax' => '0',
-                                                    'data-confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
-                                                    'onclick' => "load_data_new('location/delete/?id=".$key."')",
-                                                ]
-                                            );
-                                        },
-                                    ],*/
-                                ]
-                            ];
-    }
+                                    ['class' => 'yii\grid\ActionColumn',]
+                                ];
+    
     ?>
 <?php Pjax::begin(); ?>    <?= GridView::widget([
                                                     'dataProvider' => $dataProvider,
@@ -98,4 +49,76 @@ $this->params['breadcrumbs'][] = $this->title;
                                                     'columns' => $Action_Column_Var,
                                                 ]); 
                             ?>
-<?php Pjax::end(); ?></div>
+<?php Pjax::end(); */?>
+
+
+<div class="box">
+    <!-- /.box-header -->
+    <div class="box-body">
+      <table id="example1" class="table table-bordered table-striped">
+        <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Zip Code</th>
+          <th>City(s)</th>
+          <th>Province</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php
+
+        $iSrno = 1;
+
+        foreach ($Locations_Data as $key => $Locations_Data_Sub_Arr) {
+
+          ?>
+            <tr>
+              <td><?=$iSrno++;?></td>
+              <td><?=$Locations_Data_Sub_Arr->zip_code;?></td>
+              <td><?=$Locations_Data_Sub_Arr->city;?></td>
+              <td><?=$Locations_Data_Sub_Arr->province;?></td>
+              <td>
+              <?php
+              echo Html::a('<i class="glyphicon glyphicon-eye-open"></i>', ['/location/view/','id'=>$Locations_Data_Sub_Arr->loc_id]);
+              echo "&nbsp;&nbsp;";
+              echo Html::a('<i class="glyphicon glyphicon-pencil"></i>', ['/location/update/','id'=>$Locations_Data_Sub_Arr->loc_id]);
+              echo "&nbsp;&nbsp;";
+              echo Html::a('<span class="glyphicon glyphicon-trash"></span>', ['/location/delete', 'id' => $Locations_Data_Sub_Arr->loc_id], [
+                      'class' => '',
+                      'data' => [
+                          'confirm' => 'Are you sure ? want to delete.',
+                          'method' => 'post',
+                      ],
+                  ]);
+              ?>
+              </td>
+            </tr>
+          <?php
+        }
+        ?>
+        </tbody>
+        <tfoot>
+        </tfoot>
+      </table>
+    </div>
+    <!-- /.box-body -->
+  </div>
+
+</div>
+
+
+<?= $this->registerJsFile('@Pluginpath/datatables/jquery.dataTables.min.js',['depends' => [yii\web\JqueryAsset::className()]]);?>
+<?= $this->registerJsFile('@Pluginpath/datatables/dataTables.bootstrap.min.js',['depends' => [yii\web\JqueryAsset::className()]]);?>
+
+<?= $this->registerJs("
+  $(function () {
+    $('#example1').DataTable({
+      'paging': true,
+      'lengthChange': false,
+      'searching': false,
+      'ordering': true,
+      'info': true,
+      'autoWidth': false
+    });
+  });");?>

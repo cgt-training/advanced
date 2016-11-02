@@ -75,7 +75,7 @@ $img_path = Yii::$app->request->baseUrl . '/backend/web';
                 <?php $this->endContent(); ?>  
 
               <!-- Content Wrapper. Contains page content -->
-              <div class="content-wrapper" id="pjax_main_container">
+              <div class="content-wrapper" id="pjax_main_container" style="overflow:auto;">
                 <!-- Content Header (Page header) -->
                  <?=$content;?>
                 <!-- /.content -->
@@ -136,3 +136,4 @@ $img_path = Yii::$app->request->baseUrl . '/backend/web';
   });
 
 </script>
+

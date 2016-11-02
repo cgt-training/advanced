@@ -13,49 +13,24 @@ $this->title = 'Departments List';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="department-index" style="margin:15px;">
-
+<h2><?= Yii::$app->session->getFlash('response_msg'); ?></h2>
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    
-
-<?php
-    
-    if (Yii::$app->user->isGuest) {
-        $Action_Column_Var = [
-                                ['class' => 'yii\grid\SerialColumn'],
-                                [
-                                    'attribute'=>'c_id',
-                                    'value'=>'c.c_name',
-                                ],
-                                [
-                                    'attribute'=>'b_id',
-                                    'value'=>'b.br_name',
-                                ],
-                                'dept_name',
-                                'dept_created_date',
-                             ];   
-    }
-    else
-    {
-        ?>
-        <p>
-            <?php /*Html::a('Create Department', ['create'], ['class' => 'btn btn-success']) */?>
-        </p>
-
-        <?= Html::button('Create Department', ['value'=>Url::toRoute('department/create'), 'class' => 'btn btn-success', 
+        <p><?= Html::button('Create Department', ['value'=>Url::toRoute('department/create'), 'class' => 'btn btn-success', 
                                                     'id'=>'modalButton' ]) ?>
-
+</p>
 
          <?php
+        
             Modal::begin([
-                    //'header'=>'<h4>Departments</h4>',
+                    'header'=>'<h3>Create Department</h3>',
                     'id'=>'modal',
                     'size'=>'modal-md',
                 ]);
             echo "<div id='modalContent'></div>";
             Modal::end();
-
+/*
         $Action_Column_Var =    
                             [
                                 ['class' => 'yii\grid\SerialColumn'],
@@ -108,10 +83,10 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 ]
                                             );
                                         },
-                                    ],*/
+                                    ],
                                 ]
                             ];
-    }
+    
     
 ?>
 
@@ -121,4 +96,81 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => $Action_Column_Var,
     ]); ?>
-<?php Pjax::end(); ?></div>
+<?php Pjax::end(); */?>
+
+<div class="box">
+    <!-- /.box-header -->
+    <div class="box-body">
+      <table id="dept_table" class="table table-bordered table-striped">
+        <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Company</th>
+          <th>Branch Name</th>
+          <th>Address</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php
+
+        $iSrno = 1;
+
+        foreach ($Department_Arr as $key => $Dept_Sub_Arr) {
+
+          //echo "<pre>";
+          //print_r($Dept_Sub_Arr);
+
+
+
+          ?>
+            <tr>
+              <td><?=$iSrno++;?></td>
+              <td><?=$Dept_Sub_Arr['company']->c_name;?></td>
+              <td><?=$Dept_Sub_Arr['branch']->br_name;?></td>
+              <td><?=$Dept_Sub_Arr->dept_name;?></td>
+              <td>
+              <?php
+                  echo Html::a('<i class="glyphicon glyphicon-eye-open"></i>', ['/department/view/','id'=>$Dept_Sub_Arr->dept_id]);
+                  echo "&nbsp;&nbsp;";
+                  echo Html::a('<i class="glyphicon glyphicon-pencil"></i>', ['/department/update/','id'=>$Dept_Sub_Arr->dept_id]);
+                  echo "&nbsp;&nbsp;";
+                  echo Html::a('<span class="glyphicon glyphicon-trash"></span>', ['/department/delete', 'id' => $Dept_Sub_Arr->dept_id], [
+                          'class' => '',
+                          'data' => [
+                              'confirm' => 'Are you sure ? want to delete.',
+                              'method' => 'post',
+                          ],
+                      ]);
+                  ?>
+                  </td>
+                </tr>
+              <?php
+        }
+        ?>
+        </tbody>
+        <tfoot>
+        </tfoot>
+      </table>
+    </div>
+<!-- /.box-body -->
+</div>
+
+</div>
+
+
+
+<?= $this->registerJsFile('@Pluginpath/datatables/jquery.dataTables.min.js',['depends' => [yii\web\JqueryAsset::className()]]);?>
+<?= $this->registerJsFile('@Pluginpath/datatables/dataTables.bootstrap.min.js',['depends' => [yii\web\JqueryAsset::className()]]);?>
+
+<?= $this->registerJs("
+  $(function () {
+    $('#dept_table').DataTable({
+      'paging': true,
+      'lengthChange': false,
+      'searching': false,
+      'ordering': true,
+      'info': true,
+      'autoWidth': false
+    });
+  });");?>

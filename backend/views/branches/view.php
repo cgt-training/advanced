@@ -10,9 +10,9 @@ $this->title = "Detail View for ".$model->br_name;
 $this->params['breadcrumbs'][] = ['label' => 'Branches', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="branches-view" style="margin:15px;">
+<div class="branches-view" style="width:50%; margin:0 auto;">
 
-    <h1 style="margin:15px;"><?= Html::encode($this->title) ?></h1>
+    <h1 "><?= Html::encode($this->title) ?></h1>
 
     <p>
         <?= Html::a('Back', ['/branches',], ['class' => 'btn btn-primary']) ?>

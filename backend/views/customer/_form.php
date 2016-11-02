@@ -6,17 +6,16 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Customer */
 /* @var $form yii\widgets\ActiveForm */
+
+$Style_Var = $model->isNewRecord ? 'width:100%; margin:0 auto;' : 'width:50%; margin:0 auto;';
+$Title_Val = $model->isNewRecord ? '' : "<h1>".Html::encode($this->title)."</h1>";
 ?>
 
-<div class="customer-form">
+<div class="customer-form" style="<?=$Style_Var;?>">
 
     <?php $form = ActiveForm::begin(['id' => 'customer_form_id','options' => ['enctype' => 'multipart/form-data','class'=>'form-horizontal']]); ?>
-    <h1><?= Html::encode($this->title) ?></h1>
+    <?=$Title_Val;?>
     <div class="box-body">
-
-        <?= $form->field($model, 'cust_id', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
-                                                'labelOptions' => [ 'class' => 'control-label col-sm-3',]
-                                            ])->textInput(['maxlength' => true,'placeholder'=>'Customer Id']) ?>
 
         <?= $form->field($model, 'cust_name', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
                                                 'labelOptions' => [ 'class' => 'control-label col-sm-3',]
@@ -24,7 +23,7 @@ use yii\widgets\ActiveForm;
 
         <?= $form->field($model, 'zip_code', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
                                                 'labelOptions' => [ 'class' => 'control-label col-sm-3',]
-                                            ])->dropDownList([ $List_Location_Arr, ], ['prompt' => '']) ?>
+                                            ])->dropDownList($List_Location_Arr, ['prompt' => 'Select Code']) ?>
 
         <?= $form->field($model, 'city', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
                                                 'labelOptions' => [ 'class' => 'control-label col-sm-3',]

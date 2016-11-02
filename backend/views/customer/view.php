@@ -10,9 +10,9 @@ $this->title = "Detail View for ".$model->cust_name;
 $this->params['breadcrumbs'][] = ['label' => 'Customers', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="customer-view" style="margin:15px;">
+<div class="customer-view" style="width:50%;margin:0 auto;">
 
-    <h1 style="margin:15px;"><?= Html::encode($this->title) ?></h1>
+    <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
         <?= Html::a('Back', ['/customer',], ['class' => 'btn btn-primary']) ?>
@@ -21,7 +21,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'cust_id',
             'cust_name',
             'zip_code',
             'city',

@@ -4,12 +4,16 @@ namespace backend\controllers;
 
 use Yii;
 use backend\models\Company;
+use backend\models\Branches;
 use backend\models\CompanySearch;
 use backend\models\UploadForm;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
+use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
+
 
 /**
  * CompanyController implements the CRUD actions for Company model.
@@ -45,9 +49,13 @@ class CompanyController extends Controller
         $searchModel = new CompanySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        $Company_Arr = Company::find()->orderBy('c_name')
+                              ->all();
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'Company_Arr' => $Company_Arr,
         ]);
     }
 
@@ -71,6 +79,8 @@ class CompanyController extends Controller
     public function actionCreate()
     {
         $model = new Company();
+        $modelBranches = [new Branches];
+        //$modelBranches = [new Address];
         /*echo "<pre>";
         print_r($_FILES);
         print_r($_REQUEST);
@@ -87,11 +97,103 @@ class CompanyController extends Controller
             $Upload_Model = new UploadForm();
 
             if (Yii::$app->request->isPost) {
+
+                $command = (new \yii\db\Query())
+                                ->select(['MAX(c_id)+1 as C_Max_Id'])
+                                ->from('company')
+                                ->createCommand();
+
+                // returns all rows of the query result
+                $rows = $command->queryAll();
+                
+                $model->c_id = $rows[0]['C_Max_Id'];
+                $model->c_start_date = date('Y-m-d H:i:s');
+                $model->c_create_date = date('Y-m-d H:i:s');
+
+
+                $branch_command = (new \yii\db\Query())
+                                 ->select(['MAX(b_id)+1 as B_Max_Id'])
+                                  ->from('branches')
+                                  ->createCommand();
+
+                // returns all rows of the query result
+                $branches_rows = $branch_command->queryAll();
+                $Max_Branch_Id = $branches_rows[0]['B_Max_Id'];
                 
                 $model->c_logo = UploadedFile::getInstance($model, 'c_logo');
                 $Upload_Model->imageFile = UploadedFile::getInstance($model, 'c_logo');
 
-                if ($Upload_Model->upload() || 1) {
+                $modelBranches = $model::createMultiple(Branches::classname());
+                $model::loadMultiple($modelBranches, Yii::$app->request->post());
+
+                // ajax validation
+                if (Yii::$app->request->isAjax) {
+                    Yii::$app->response->format = Response::FORMAT_JSON;
+                    return ArrayHelper::merge(
+                        ActiveForm::validateMultiple($modelBranches),
+                        ActiveForm::validate($model)
+                    );
+                }
+
+                // validate all models
+                $valid = $model->validate();
+                $valid = $model::validateMultiple($modelBranches) && $valid;
+
+                
+                // $errors = $model->errors;
+                // print_r($errors);
+
+               // exit;
+
+                $Error_Msg = '';
+
+                if ($valid) {
+                    $transaction = \Yii::$app->db->beginTransaction();
+                    try {
+
+                        $Upload_Model->upload();
+
+                        if ($flag = $model->save(false)) {
+                            foreach ($modelBranches as $modelBranches) {
+
+                                $modelBranches->b_id = $Max_Branch_Id;
+                                $modelBranches->c_id = $model->c_id;
+                                $modelBranches->br_created = date('Y-m-d H:i:s');
+
+                                if (! ($flag = $modelBranches->save(false))) {
+                                    $transaction->rollBack();
+                                    \Yii::$app->getSession()->setFlash('response_msg', 'Record Not Saved ..');
+                                    break;
+                                }
+                                $Max_Branch_Id++;
+                            }
+                        }
+
+                        if ($flag) {
+                            $transaction->commit();
+                            \Yii::$app->getSession()->setFlash('response_msg', 'Record Save Successful..');                            
+                            return $this->redirect(['index',]);
+                        }
+                    } catch (Exception $e) {
+                        \Yii::$app->getSession()->setFlash('response_msg', 'Record Not Saved ..');
+                        $transaction->rollBack();
+                    }
+                }
+                else
+                  {
+                    $errors = $model->errors;
+                    if(isset($errors['c_email'][0]) && $errors['c_email'][0])
+                      $Error_Msg = $errors['c_email'][0];
+
+                    if(isset($errors['c_name'][0]) && $errors['c_name'][0])
+                      $Error_Msg = $errors['c_name'][0];
+                  }
+                  
+                \Yii::$app->getSession()->setFlash('response_msg', $Error_Msg);
+
+                return $this->redirect(['index',]);
+
+                /*if ($Upload_Model->upload() || 1) {
                      if($model->save())
                      {
                         $searchModel = new CompanySearch();
@@ -99,7 +201,7 @@ class CompanyController extends Controller
 
                         return $this->render('index', [
                                 'searchModel' => $searchModel,
-                                'dataProvider' => $dataProvider,
+                                'recordProvider' => $dataProvider,
                             ]);
                      }
                         //return $this->redirect(['view', 'id' => $model->c_id]);
@@ -114,11 +216,13 @@ class CompanyController extends Controller
             else{
                 echo "Error in uploading";
                 exit;
-            }
+            }*/
         }
         } else {
-            return $this->renderAjax('create', [
+
+            return $this->render('create', [
                 'model' => $model,
+                'modelBranches' => (empty($modelBranches)) ? [new Branches] : $modelBranches
             ]);
         }
     }
@@ -138,6 +242,7 @@ class CompanyController extends Controller
         }
 
         $model = $this->findModel($id);
+        $modelBranches = $model->branches;
 
         if ($model->load(Yii::$app->request->post())) {
 
@@ -148,7 +253,55 @@ class CompanyController extends Controller
                 $Upload_Model->imageFile = UploadedFile::getInstance($model, 'c_logo');
 
                 if ($Upload_Model->upload() || 1) {
-                    if($model->save())
+
+                  $oldIDs = ArrayHelper::map($modelBranches, 'b_id', 'b_id');
+
+                  $modelBranches = $model::createMultiple(Branches::classname(), $modelBranches);
+
+                  $model::loadMultiple($modelBranches, Yii::$app->request->post());
+                  $deletedIDs = array_diff($oldIDs, array_filter(ArrayHelper::map($modelBranches, 'b_id', 'b_id')));
+
+                  // ajax validation
+                  if (Yii::$app->request->isAjax) {
+                      Yii::$app->response->format = Response::FORMAT_JSON;
+                      return ArrayHelper::merge(
+                          ActiveForm::validateMultiple($modelBranches),
+                          ActiveForm::validate($model)
+                      );
+                  }
+
+                  // validate all models
+                  $valid = $model->validate();
+                  $valid = $model::validateMultiple($modelBranches) && $valid;
+                  
+                  if (1) {
+                      $transaction = \Yii::$app->db->beginTransaction();
+                      try {
+                          if ($flag = $model->save(false)) {
+                              if (! empty($deletedIDs)) {
+                                  Branches::deleteAll(['b_id' => $deletedIDs]);
+                              }
+                              foreach ($modelBranches as $modelBranch) {
+                                  $modelBranch->c_id = $model->c_id;
+                                  //echo "<pre>";
+                                  //print_r($modelBranch);
+                                  //exit;
+                                  if (! ($flag = $modelBranch->save(false))) {
+                                      $transaction->rollBack();
+                                      break;
+                                  }
+                              }
+                          }
+                          if ($flag) {
+                              \Yii::$app->getSession()->setFlash('response_msg', 'Record Updated Successful..');
+                              $transaction->commit();
+                              return $this->redirect(['index',]);
+                          }
+                      } catch (Exception $e) {
+                          $transaction->rollBack();
+                      }
+                  }
+                    /*if($model->save())
                     {
                         //return $this->redirect(['view', 'id' => $model->c_id]);
                         $searchModel = new CompanySearch();
@@ -163,17 +316,18 @@ class CompanyController extends Controller
                            return $this->render('create', ['model' => $model,]);
                     // file is uploaded successfully
                     //return;
-                }
+                }*/
             }
             else{
-                echo "Error in uploading";
-                exit;
+                \Yii::$app->getSession()->setFlash('response_msg', 'Error in file uploading..');
+                return $this->redirect(['index',]);
             }
           }
       }
      else {
             return $this->render('update', [
                 'model' => $model,
+                'modelBranches' => (empty($modelBranches)) ? [new Branches] : $modelBranches,
             ]);
         }
     }
@@ -195,13 +349,10 @@ class CompanyController extends Controller
         $this->findModel($id)->delete();
 
         //return $this->redirect(['index']);
-        $searchModel = new CompanySearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+      
+        \Yii::$app->getSession()->setFlash('response_msg', 'Record deleted successfully..');
 
-        return $this->render('index', [
-                'searchModel' => $searchModel,
-                'dataProvider' => $dataProvider,
-            ]);
+        return $this->redirect(['index',]);
     }
 
     /**

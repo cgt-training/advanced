@@ -8,6 +8,7 @@ use backend\models\LocationSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\data\ActiveDataProvider;
 
 /**
  * LocationController implements the CRUD actions for Location model.
@@ -22,9 +23,9 @@ class LocationController extends Controller
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
-                'actions' => [
+                /*'actions' => [
                     'delete' => ['POST'],
-                ],
+                ],*/
             ],
         ];
     }
@@ -43,7 +44,12 @@ class LocationController extends Controller
         $searchModel = new LocationSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', ['searchModel' => $searchModel,'dataProvider' => $dataProvider,]);
+        $Locations = Location::find()->select(['loc_id','zip_code','city','province'])
+                                    ->orderBy('zip_code')
+                                    ->all();
+
+        return $this->render('index', 
+                ['searchModel' => $searchModel,'dataProvider' => $dataProvider,'Locations_Data' => $Locations,]);
     }
 
     /**
@@ -71,12 +77,30 @@ class LocationController extends Controller
 
         $model = new Location();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+
+            $command = (new \yii\db\Query())
+                                ->select(['MAX(loc_id)+1 as L_Max_Id'])
+                                ->from('location')
+                                ->createCommand();
+
+            // returns all rows of the query result
+            $rows = $command->queryAll();
+            $model->loc_id = $rows[0]['L_Max_Id'];
+            if(!$model->save()){
+                \Yii::$app->getSession()->setFlash('response_msg', 'Record not saved..');
+            }
 
             $searchModel = new LocationSearch();
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-            return $this->render('index', ['searchModel' => $searchModel,'dataProvider' => $dataProvider,]);
+            $Locations = Location::find()->select(['loc_id','zip_code','city','province'])
+                                    ->orderBy('zip_code')
+                                    ->all();
+
+            \Yii::$app->getSession()->setFlash('response_msg', 'Record Saved Successfully..');
+
+            return $this->render('index', ['searchModel' => $searchModel,'dataProvider' => $dataProvider,'Locations_Data' => $Locations,]);
 
             //return $this->redirect(['view', 'id' => $model->loc_id]);
         } else {
@@ -105,9 +129,14 @@ class LocationController extends Controller
             $searchModel = new LocationSearch();
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+            $Locations = Location::find()->select(['loc_id','zip_code','city','province'])
+                                    ->orderBy('zip_code')
+                                    ->all();
+
             return $this->render('index', [
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
+                'Locations_Data' => $Locations,
             ]);
         } else {
             return $this->render('update', ['model' => $model,]);
@@ -133,7 +162,15 @@ class LocationController extends Controller
         $searchModel = new LocationSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', ['searchModel' => $searchModel,'dataProvider' => $dataProvider,]);
+        $Locations = Location::find()->select(['loc_id','zip_code','city','province'])
+                                    ->orderBy('zip_code')
+                                    ->all();
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'Locations_Data' => $Locations,
+        ]);
         //return $this->redirect(['index']);
     }
 

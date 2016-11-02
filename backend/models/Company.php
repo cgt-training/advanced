@@ -1,8 +1,10 @@
 <?php
 
 namespace backend\models;
+//namespace backend\base;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "company".
@@ -36,15 +38,16 @@ class Company extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['c_id', 'c_name', 'c_email', 'c_add', 'c_start_date', 'c_create_date', 'c_status'], 'required'],
+            [['c_id', 'c_name', 'c_email', 'c_add' /*'c_start_date', 'c_create_date'*/ , 'c_status'], 'required'],
+            ['c_name', 'unique', 'message' => 'This company name has already been taken.'],
             [['c_id'], 'integer'],
             [['c_add', 'c_status'], 'string'],
             [['c_name'], 'string', 'max' => 100],
             [['c_email'], 'string', 'max' => 150],
             // the email attribute should be a valid email address
-            ['c_email', 'email'],
-            ['c_start_date', 'date', 'format' => 'php:Y-m-d H:i:s'],
-            ['c_create_date', 'date', 'format' => 'php:Y-m-d H:i:s'],
+            ['c_email', 'email','message'=>"The email isn't correct"],
+            ['c_email', 'unique','message'=>"Email already exists "],
+            
         ];
     }
 
@@ -88,5 +91,34 @@ class Company extends \yii\db\ActiveRecord
     public static function find()
     {
         return new CompanyQuery(get_called_class());
+    }
+
+    public static function createMultiple($modelClass, $multipleModels = [])
+    {
+        $model    = new $modelClass;
+        $formName = $model->formName();
+        $post     = Yii::$app->request->post($formName);
+        $models   = [];
+
+        if (! empty($multipleModels)) {
+            $keys = array_keys(ArrayHelper::map($multipleModels, 'b_id', 'b_id'));
+            $multipleModels = array_combine($keys, $multipleModels);
+        }
+
+        
+
+        if ($post && is_array($post)) {
+            foreach ($post as $i => $item) {
+                if (isset($item['b_id']) && !empty($item['b_id']) && isset($multipleModels[$item['b_id']])) {
+                    $models[] = $multipleModels[$item['b_id']];
+                } else {
+                    $models[] = new $modelClass;
+                }
+            }
+        }
+
+        unset($model, $formName, $post);
+
+        return $models;
     }
 }

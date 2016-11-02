@@ -13,10 +13,12 @@ class DashboardAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
                     'css/bootstrap.min.css',
+                    'css/select2.min.css',
                     'dist/css/AdminLTE.min.css',
                     'dist/css/skins/_all-skins.min.css',
                     'plugins/iCheck/flat/blue.css',
                     'plugins/morris/morris.css',
+                    'plugins/datatables/dataTables.bootstrap.css',
                     'plugins/jvectormap/jquery-jvectormap-1.2.2.css',
                     'plugins/select2/select2.min.css',
                     'plugins/datepicker/datepicker3.css',
@@ -28,14 +30,17 @@ class DashboardAsset extends AssetBundle
 
     public $js = [
                     'js/main.js',
-                    'js/bootstrap.min.js',
+                    'js/select2.full.js',
                     '//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js',
                     'js/jquery-ui.min.js',
+                    'js/bootstrap.min.js',
                     //'plugins/morris/morris.min.js',
                     'plugins/sparkline/jquery.sparkline.min.js',
                     'plugins/jvectormap/jquery-jvectormap-1.2.2.min.js',
                     'plugins/jvectormap/jquery-jvectormap-world-mill-en.js',
                     'plugins/knob/jquery.knob.js',
+                    'plugins/datatables/jquery.dataTables.min.js',
+                    'plugins/datatables/dataTables.bootstrap.min.js',
                     '//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js',
                     'plugins/daterangepicker/daterangepicker.js',
                     'plugins/datepicker/bootstrap-datepicker.js',
@@ -45,11 +50,11 @@ class DashboardAsset extends AssetBundle
                     'dist/js/app.min.js',
                     'dist/js/pages/dashboard.js',
                     'dist/js/demo.js',
-                    'plugins/select2/select2.full.min.js',
                 ];
 
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
+        'yii\web\JqueryAsset',
     ];
 }

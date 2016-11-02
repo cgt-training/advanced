@@ -8,39 +8,33 @@ use kartik\select2\Select2;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Department */
 /* @var $form yii\widgets\ActiveForm */
+$Style_Var = $model->isNewRecord ? 'width:100%; margin:0 auto;' : 'width:50%; margin:0 auto;';
+$Title_Val = $model->isNewRecord ? '' : "<h1>".Html::encode($this->title)."</h1>";
 ?>
 
-<div class="department-form">
+<div class="department-form" style="<?=$Style_Var;?>">
 
     <?php $form = ActiveForm::begin(['id' => 'dept_form_id','options' => ['enctype' => 'multipart/form-data','class'=>'form-horizontal']]); ?>
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <?=$Title_Val;?>
 
     <div class="box-body">
 
-      <?= $form->field($model, 'dept_id', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
-                                            'labelOptions' => [ 'class' => 'control-label col-sm-3',]
-                                        ])->textInput(['maxlength' => true,'placeholder'=>'Department Id']) ?>
-
       <?= $form->field($model, 'c_id', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
                                             'labelOptions' => [ 'class' => 'control-label col-sm-3',]
-                                        ])->dropDownList([ $List_Company_Arr, ], ['prompt' => '']) ?>
+                                        ])->dropDownList($List_Company_Arr, ['prompt' => 'Select Company','class'=>'form-control select2','style'=>"width: 100%;"]) ?>
 
       <?= $form->field($model, 'b_id', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
                                             'labelOptions' => [ 'class' => 'control-label col-sm-3',]
-                                        ])->dropDownList([ $List_Branches_Arr, ], ['prompt' => '']) ?>
+                                        ])->dropDownList($List_Branches_Arr, ['prompt' => 'Select Branch','class'=>'form-control select2','style'=>"width: 100%;"]) ?>
 
       <?= $form->field($model, 'dept_name', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
                                             'labelOptions' => [ 'class' => 'control-label col-sm-3',]
                                         ])->textInput(['maxlength' => true,'placeholder'=>'Department Name']) ?>
 
-      <?= $form->field($model, 'dept_created_date', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
-                                            'labelOptions' => [ 'class' => 'control-label col-sm-3',]
-                                        ])->textInput(['maxlength' => true,'placeholder'=>'Create Date']) ?>
-
       <?= $form->field($model, 'dtep_status', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
                                             'labelOptions' => [ 'class' => 'control-label col-sm-3',]
-                                        ])->dropDownList([ 'Yes' => 'Yes', 'No' => 'No', ], ['prompt' => '']) ?>
+                                        ])->dropDownList([ 'Yes' => 'Yes', 'No' => 'No', ], ['prompt' => 'Select Status','class'=>'form-control select2','style'=>"width: 100%;"]) ?>
 
        <?php
        /*
@@ -61,32 +55,13 @@ use kartik\select2\Select2;
       </div>
     </div>
 
-    <?php ActiveForm::end(); ?>
+  <?php ActiveForm::end(); ?>
 
 </div>
 
-<?php
-    $form = ActiveForm::begin();
-    $form->field($model, 'dept_created_date')->widget(DatePicker::className(),[
-   'name' => 'dept_created_date',
-   'language' => 'en-GB',
-   'dateFormat' => 'yyyy-MM-dd',
-   'options' => [
-      'changeMonth' => true,
-      'changeYear' => true,
-      'yearRange' => '1996:2099',
-      'showOn' => 'button',
-      'buttonImage' => 'images/calendar.gif',
-      'buttonImageOnly' => true,
-      'buttonText' => 'Select date'
-    ],
-]) ?>
-
-
-
+<?= $this->registerJs("$('.select2').select2();");?>
 
 <script type="text/javascript">
-/*
 
 var url_data = "department/create";
 
@@ -106,7 +81,7 @@ if($('#department-dept_id').val())
     return false;
   });
 
-
+/*
   $('#submit_id').click(function(){
     $.ajax({
         url: url_data, 

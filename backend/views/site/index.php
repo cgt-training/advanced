@@ -81,9 +81,8 @@
       <div class="row">
       
         <section class="col-lg-7 connectedSortable">
-          <div class="box box-success">
           <div class="box box-info text-center">
-          <h3 class="text-center">Welcome to DashBoard</h3>
+            <h3 class="text-center">Welcome to DashBoard</h3>
           </div>
         </section>
         
