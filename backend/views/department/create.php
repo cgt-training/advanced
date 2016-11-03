@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="department-create">
 
-    <?= $this->render('_form', [
+    <?php echo  $this->render('_form', [
         'model' => $model,
          'List_Company_Arr' => $List_Company_Arr,
          'List_Branches_Arr' => $List_Branches_Arr,

@@ -22,11 +22,11 @@ use wbraganca\dynamicform\DynamicFormWidget;
                     <div class="panel-heading"><h4><i class="glyphicon glyphicon-envelope"></i> Role</h4></div>
                     <div class="panel-body">
                         <div class="class="container-items"">
-                            <?= $form->field($modelAuthItem, 'name', ['template' => "{label}\n<div class='col-sm-6'>{input}</div>\n{hint}\n{error}",
+                            <?php echo $form->field($modelAuthItem, 'name', ['template' => "{label}\n<div class='col-sm-6'>{input}</div>\n{hint}\n{error}",
                                                             'labelOptions' => [ 'class' => 'control-label col-sm-3']
                                                         ])->textInput(['maxlength' => true]) ?>
 
-                            <?= $form->field($modelAuthItem, 'description', ['template' => "{label}\n<div class='col-sm-6'>{input}</div>\n{hint}\n{error}",
+                            <?php echo $form->field($modelAuthItem, 'description', ['template' => "{label}\n<div class='col-sm-6'>{input}</div>\n{hint}\n{error}",
                                                     'labelOptions' => [ 'class' => 'control-label col-sm-3']
                                                 ])->textarea(['rows' => 4,'placeholder'=>'Address']) ?>
                         </div>
@@ -65,14 +65,7 @@ use wbraganca\dynamicform\DynamicFormWidget;
                             </div>
                             <div class="panel-body">
 
-                                <?php
-
-                                    // necessary for update action.
-                                    //if (! $modelAuthItemChild->isNewRecord) {
-                                      //  echo Html::activeHiddenInput($modelAuthItemChild, "[{$i}]b_id");
-                                    //}
-                                ?>
-                                <?= $form->field($modelAuthItemChild, "[{$i}]child", ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
+                                <?php echo $form->field($modelAuthItemChild, "[{$i}]child", ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
                                                 'labelOptions' => [ 'class' => 'control-label col-sm-3',]
                                             ])->dropDownList($Auth_Item_Child_Arr, ['prompt' => 'Select Permission','class'=>'form-control select2','style'=>"width: 100%;"])
                                 ?>
@@ -88,8 +81,8 @@ use wbraganca\dynamicform\DynamicFormWidget;
         </div>
 
         <div class="form-group col-sm-12 text-center">
-            <?= Html::submitButton($modelAuthItemChild->isNewRecord ? 'Create' : 'Update', ['class' => 'btn btn-primary']) ?>
-            <?= Html::a('Cancel', ['/auth-item/'], ['class'=>'btn btn-danger']) ?>
+            <?php echo Html::submitButton($modelAuthItemChild->isNewRecord ? 'Create' : 'Update', ['class' => 'btn btn-primary']) ?>
+            <?php echo Html::a('Cancel', ['/auth-item/'], ['class'=>'btn btn-danger']) ?>
         </div>
         </div>
     </div>
@@ -97,4 +90,4 @@ use wbraganca\dynamicform\DynamicFormWidget;
     <?php ActiveForm::end(); ?>
 
 </div>
-<?= $this->registerJs("$('.select2').select2();");?>
+<?php echo $this->registerJs("$('.select2').select2();");?>

@@ -23,7 +23,7 @@ $img_path = Yii::$app->request->baseUrl . '/backend/web';
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-         <img src=<?=$img_path."/dist/img/user2-160x160.jpg"?> class="img-circle" alt="User Image">
+         <img src=<?php echo $img_path."/dist/img/user2-160x160.jpg"?> class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p><?php echo strtoupper(Yii::$app->user->identity->username);?></p>
@@ -51,15 +51,15 @@ $img_path = Yii::$app->request->baseUrl . '/backend/web';
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><?= Html::a("<i class='fa fa-circle-o'></i>Dashboard", ['/site'],['id'=>'company_id']) ?></li>
+            <li class="active"><?php echo  Html::a("<i class='fa fa-circle-o'></i>Dashboard", ['/site'],['id'=>'company_id']) ?></li>
             <!--<li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>-->
-            <li><?= Html::a("<i class='fa fa-users'></i>User", ['/user'],['id'=>'user_id']) ?></li>
-            <li><?= Html::a("<i class='fa fa-home'></i>Company", ['/company'],['id'=>'company_id']) ?></li>
-            <li><?= Html::a("<i class='fa fa-laptop'></i>Branches", ['/branches'],['id'=>'branch_id']) ?></li>
-            <li><?= Html::a("<i class='fa fa-table'></i>Department", ['/department'],['id'=>'dept_id']) ?></li>
-            <li><?= Html::a("<i class='fa fa-location-arrow'></i>Location", ['/location'],['id'=>'loc_id']) ?></li>
-            <li><?= Html::a("<i class='fa fa-user'></i>Customer", ['/customer'],['id'=>'cust_id']) ?></li>
-            <li><?= Html::a("<i class='fa fa-book'></i>Roles & Permissions", ['/auth-item'],['id'=>'role_id']) ?></li>
+            <li><?php echo  Html::a("<i class='fa fa-users'></i>User", ['/user'],['id'=>'user_id']) ?></li>
+            <li><?php echo  Html::a("<i class='fa fa-home'></i>Company", ['/company'],['id'=>'company_id']) ?></li>
+            <li><?php echo  Html::a("<i class='fa fa-laptop'></i>Branches", ['/branches'],['id'=>'branch_id']) ?></li>
+            <li><?php echo  Html::a("<i class='fa fa-table'></i>Department", ['/department'],['id'=>'dept_id']) ?></li>
+            <li><?php echo  Html::a("<i class='fa fa-location-arrow'></i>Location", ['/location'],['id'=>'loc_id']) ?></li>
+            <li><?php echo  Html::a("<i class='fa fa-user'></i>Customer", ['/customer'],['id'=>'cust_id']) ?></li>
+            <li><?php echo  Html::a("<i class='fa fa-book'></i>Roles & Permissions", ['/auth-item'],['id'=>'role_id']) ?></li>
             <li>
             <?php
             if (!Yii::$app->user->isGuest)

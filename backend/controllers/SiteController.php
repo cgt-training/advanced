@@ -6,10 +6,10 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
-use backend\models\Company;
-use backend\models\Branches;
-use backend\models\Department;
-use backend\models\Customer;
+use common\models\Company;
+use common\models\Branches;
+use common\models\Department;
+use common\models\Customer;
 
 /**
  * Site controller
@@ -72,37 +72,43 @@ class SiteController extends Controller
     public function actionIndex()
     {
         /* Company Count */
-        $Company_Arr = Company::find()->all();
+        $Company_Arr = Company::find()->orderBy('c_name')->all();
 
         $comp_count = count($Company_Arr);
 
         /* Branches Count */
 
-        $Branch_Arr = Branches::find()->all();
+        $Branches_Arr = Branches::find()->select(['branches.*','company.c_name'])
+                                         ->orderBy('br_name')
+                                          ->joinWith('company')
+                                          ->all();
 
-        $bran_count = count($Branch_Arr);
+        $bran_count = count($Branches_Arr);
 
         /* Department Count */
 
-        $Dept_Arr = Department::find()->all();
+        $Department_Arr = Department::find()->orderBy('dept_name')
+                                            ->joinWith('branch')
+                                            ->joinWith('company')
+                                            ->all();
 
         //$dept_count = $Dept_Arr->department_count;
-        $dept_count = count($Dept_Arr);
+        $dept_count = count($Department_Arr);
 
         /* Customer Count */
 
-        $Cust_Arr = Customer::find()->all();
+        $Customer_Arr = Customer::find()->orderBy('cust_name')->all();
 
         //$cust_count = $Cust_Arr->customer_count;
         
-        $cust_count = count($Cust_Arr);
+        $cust_count = count($Customer_Arr);
 
         return $this->render('index',
                                     [
                                         'Company_Arr'=>$Company_Arr,'company_count'=>$comp_count,
-                                        'Branch_Arr' => $Branch_Arr, 'branch_count'=>$bran_count,
-                                        'Dept_Arr'=>$Dept_Arr, 'department_count'=>$dept_count,
-                                        'Cust_Arr'=>$Cust_Arr, 'customer_count' => $cust_count,
+                                        'Branches_Arr' => $Branches_Arr, 'branch_count'=>$bran_count,
+                                        'Department_Arr'=>$Department_Arr, 'department_count'=>$dept_count,
+                                        'Customer_Arr'=>$Customer_Arr, 'customer_count' => $cust_count,
                                     ]
                             );
         //exit;

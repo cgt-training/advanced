@@ -11,7 +11,7 @@ $this->title = 'Login';
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
 <body class="hold-transition login-page">
-<h2><?= Yii::$app->session->getFlash('response_msg'); ?></h2>
+<h2><?php echo  Yii::$app->session->getFlash('response_msg'); ?></h2>
     <div class="login-box">
       <div class="login-logo">
         <a href="#"><b>Admin</b>LTE</a>
@@ -21,24 +21,24 @@ $this->title = 'Login';
 
               <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
                 <div class="form-group has-feedback">
-                  <?= $form->field($model, 'username')->textInput(['autofocus' => true,'placeholder'=>'Email'])->label(false) ?>
+                  <?php echo  $form->field($model, 'username')->textInput(['autofocus' => true,'placeholder'=>'Email'])->label(false) ?>
                   <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                 </div>
                 <div class="form-group has-feedback">
-                  <?= $form->field($model, 'password')->passwordInput(['placeholder'=>'Password'])->label(false) ?>
+                  <?php echo  $form->field($model, 'password')->passwordInput(['placeholder'=>'Password'])->label(false) ?>
                   <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                 </div>
                 <div class="row">
                   <div class="col-xs-8">
                     <div class="checkbox icheck">
                       <label>
-                        <?= $form->field($model, 'rememberMe')->checkbox() ?>
+                        <?php echo  $form->field($model, 'rememberMe')->checkbox() ?>
                       </label>
                     </div>
                   </div>
                   <div class="col-xs-4">
                       <div class="form-group">
-                          <?= Html::submitButton('Sign In', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+                          <?php echo  Html::submitButton('Sign In', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
                       </div>
                   </div>
                 </div>

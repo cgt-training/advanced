@@ -5,7 +5,7 @@ namespace frontend\controllers;
 use Yii;
 use yii\web\Controller;
 use yii\data\Pagination;
-use frontend\models\Country;
+use common\models\Country;
 use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
 

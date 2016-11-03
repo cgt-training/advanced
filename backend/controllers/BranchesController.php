@@ -3,17 +3,18 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\Branches;
-use backend\models\Company;
-use backend\models\BranchesSearch;
+use common\models\Branches;
+use common\models\Company;
+use common\models\BranchesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use common\components\CommonFunctionController;
 
 /**
  * BranchesController implements the CRUD actions for Branches model.
  */
-class BranchesController extends Controller
+class BranchesController extends CommonFunctionController
 {
     /**
      * @inheritdoc
@@ -97,19 +98,15 @@ class BranchesController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
 
-             $command = (new \yii\db\Query())
-                            ->select(['MAX(b_id)+1 as Max_Id'])
-                            ->from('branches')
-                            ->createCommand();
-
-            // returns all rows of the query result
-            $rows = $command->queryAll();
-            
-            $model->b_id = $rows[0]['Max_Id'];
+             /* Get Max Id */
+            $model->b_id = $this->getMaxId('branches','b_id');
             $model->br_created = date('Y-m-d H:i:s');
 
             if(!$model->save()){
+                \Yii::$app->getSession()->setFlash('response_msg', 'Record not saved..');
             }
+
+            \Yii::$app->getSession()->setFlash('response_msg', 'Record saved successful..');
 
             return $this->redirect(['index',]);
             //return $this->renderAjax('index');
@@ -173,7 +170,9 @@ class BranchesController extends Controller
 
         $this->findModel($id)->delete();
 
-        $model = new Branches();
+        \Yii::$app->getSession()->setFlash('response_msg', 'Record deleted successfully..');
+
+        //$model = new Branches();
 
         //return $this->redirect(['index']);
         //$searchModel = new BranchesSearch();

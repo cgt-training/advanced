@@ -15,11 +15,11 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="branches-index" id='branch-index' style="margin:15px;">
-    <h2><?= Yii::$app->session->getFlash('response_msg'); ?></h2>
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h2><?php echo  Yii::$app->session->getFlash('response_msg'); ?></h2>
+    <h1><?php echo  Html::encode($this->title) ?></h1>
 
      <p>
-          <?= Html::button('Create Branches', ['value'=>Url::toRoute('branches/create'), 'class' => 'btn btn-success', 
+          <?php echo  Html::button('Create Branches', ['value'=>Url::toRoute('branches/create'), 'class' => 'btn btn-success', 
                                                   'id'=>'modalButton' ]) ?>
       </p>
     <?php // echo $this->render('_search', ['model' => $searchModel]); 
@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
     
 ?>
 <?php Pjax::begin(['id' => 'branchPjax']); ?>    
-<?= GridView::widget([
+<?php echo  GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => $Action_Column_Var,
@@ -72,10 +72,10 @@ $this->params['breadcrumbs'][] = $this->title;
         foreach ($Branches_Arr as $key => $Branch_Sub_Arr) {
           ?>
             <tr>
-              <td><?=$iSrno++;?></td>
-              <td><?=$Branch_Sub_Arr->br_name;?></td>
-              <td><?=$Branch_Sub_Arr['company']->c_name;?></td>
-              <td><?=$Branch_Sub_Arr->br_address;?></td>
+              <td><?php echo $iSrno++;?></td>
+              <td><?php echo $Branch_Sub_Arr->br_name;?></td>
+              <td><?php echo $Branch_Sub_Arr['company']->c_name;?></td>
+              <td><?php echo $Branch_Sub_Arr->br_address;?></td>
               <td>
               <?php
                   echo Html::a('<i class="glyphicon glyphicon-eye-open"></i>', ['/branches/view/','id'=>$Branch_Sub_Arr->b_id]);
@@ -106,10 +106,10 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 
 
-<?= $this->registerJsFile('@Pluginpath/datatables/jquery.dataTables.min.js',['depends' => [yii\web\JqueryAsset::className()]]);?>
-<?= $this->registerJsFile('@Pluginpath/datatables/dataTables.bootstrap.min.js',['depends' => [yii\web\JqueryAsset::className()]]);?>
+<?php echo  $this->registerJsFile('@Pluginpath/datatables/jquery.dataTables.min.js',['depends' => [yii\web\JqueryAsset::className()]]);?>
+<?php echo  $this->registerJsFile('@Pluginpath/datatables/dataTables.bootstrap.min.js',['depends' => [yii\web\JqueryAsset::className()]]);?>
 
-<?= $this->registerJs("
+<?php echo  $this->registerJs("
   $(function () {
     $('#branch_table').DataTable({
       'paging': true,

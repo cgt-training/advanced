@@ -14,13 +14,13 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="auth-item-index" style="margin-left:15px;">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?php echo  Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::button('Create Permission', ['value'=>Url::toRoute('auth-item/create'), 'class' => 'btn btn-success', 
+        <?php echo  Html::button('Create Permission', ['value'=>Url::toRoute('auth-item/create'), 'class' => 'btn btn-success', 
                                                 'id'=>'modalButton' ]) ?>
-        <?=Html::a('Assign Rights', ['assignright'], ['class' => 'btn btn-success']) ?>
+        <?php echo Html::a('Assign Rights', ['assignright'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php
@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
         echo "<div id='modalContent'></div>";
         Modal::end();
     ?>
-<?php /*Pjax::begin(); ?>    <?= GridView::widget([
+<?php /*Pjax::begin(); ?>    <?php echo  GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
@@ -71,9 +71,9 @@ $this->params['breadcrumbs'][] = $this->title;
             foreach ($AuthUsers as $key => $Auth_Sub_Arr) {
               ?>
                 <tr>
-                  <td><?=$iSrno++;?></td>
-                  <td><?=$Auth_Sub_Arr->name;?></td>
-                  <td><?=$Auth_Sub_Arr->description;?></td>
+                  <td><?php echo $iSrno++;?></td>
+                  <td><?php echo $Auth_Sub_Arr->name;?></td>
+                  <td><?php echo $Auth_Sub_Arr->description;?></td>
                   <td>
                   <?php
                       echo Html::a('<i class="glyphicon glyphicon-eye-open"></i>', ['/auth-item/view/','id'=>$Auth_Sub_Arr->name]);
@@ -104,10 +104,10 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 
 
-<?= $this->registerJsFile('@Pluginpath/datatables/jquery.dataTables.min.js',['depends' => [yii\web\JqueryAsset::className()]]);?>
-<?= $this->registerJsFile('@Pluginpath/datatables/dataTables.bootstrap.min.js',['depends' => [yii\web\JqueryAsset::className()]]);?>
+<?php echo  $this->registerJsFile('@Pluginpath/datatables/jquery.dataTables.min.js',['depends' => [yii\web\JqueryAsset::className()]]);?>
+<?php echo  $this->registerJsFile('@Pluginpath/datatables/dataTables.bootstrap.min.js',['depends' => [yii\web\JqueryAsset::className()]]);?>
 
-<?= $this->registerJs("
+<?php echo  $this->registerJs("
   $(function () {
     $('#auth_table').DataTable({
       'paging': true,

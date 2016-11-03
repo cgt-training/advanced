@@ -3,9 +3,9 @@
 namespace frontend\controllers;
 
 use Yii;
-use frontend\models\Branches;
-use frontend\models\Company;
-use frontend\models\BranchesSearch;
+use common\models\Branches;
+use common\models\Company;
+use common\models\BranchesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;

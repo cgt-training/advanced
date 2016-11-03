@@ -3,19 +3,20 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\Department;
-use backend\models\Company;
-use backend\models\Branches;
-use backend\models\DepartmentSearch;
+use common\models\Department;
+use common\models\Company;
+use common\models\Branches;
+use common\models\DepartmentSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
+use common\components\CommonFunctionController;
 
 /**
  * DepartmentController implements the CRUD actions for Department model.
  */
-class DepartmentController extends Controller
+class DepartmentController extends CommonFunctionController
 {
     /**
      * @inheritdoc
@@ -42,14 +43,9 @@ class DepartmentController extends Controller
 
     function init()
     {
-        $query = Company::find();
-        $query1 = Branches::find();
+        $Companies = Company::find()->orderBy('c_name')->all();
 
-        $Companies = $query->orderBy('c_name')
-                            ->all();
-
-        $Branches = $query1->orderBy('br_name')
-                            ->all();
+        $Branches = Branches::find()->orderBy('br_name')->all();
 
         $this->List_Company_Arr = ArrayHelper::map($Companies,'c_id','c_name');
         $this->List_Branches_Arr = ArrayHelper::map($Branches,'b_id','br_name');
@@ -115,14 +111,7 @@ class DepartmentController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
 
-            $command = (new \yii\db\Query())
-                                ->select(['MAX(dept_id)+1 as D_Max_Id'])
-                                ->from('department')
-                                ->createCommand();
-
-            // returns all rows of the query result
-            $rows = $command->queryAll();
-            $model->dept_id = $rows[0]['D_Max_Id'];
+            $model->dept_id = $this->getMaxId('department','dept_id');
             $model->dept_created_date = date('Y-m-d H:i:s');
 
             if(!$model->save()){

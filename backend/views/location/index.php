@@ -15,13 +15,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 <div class="location-index" style="margin:15px;">
-    <h2><?= Yii::$app->session->getFlash('response_msg'); ?></h2>
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h2><?php echo  Yii::$app->session->getFlash('response_msg'); ?></h2>
+    <h1><?php echo  Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
             <p>
                 <?php 
                     /*Html::a('Create Company', ['create'], ['class' => 'btn btn-success']) */?>
-                <?= Html::button('Create Location', ['value'=>Url::toRoute('location/create'), 'class' => 'btn btn-success',
+                <?php echo  Html::button('Create Location', ['value'=>Url::toRoute('location/create'), 'class' => 'btn btn-success',
                                     'id'=>'modalButton' ]) ?>
             </p>
             <?php
@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 ];
     
     ?>
-<?php Pjax::begin(); ?>    <?= GridView::widget([
+<?php Pjax::begin(); ?>    <?php echo  GridView::widget([
                                                     'dataProvider' => $dataProvider,
                                                     'filterModel' => $searchModel,
                                                     'columns' => $Action_Column_Var,
@@ -74,10 +74,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
           ?>
             <tr>
-              <td><?=$iSrno++;?></td>
-              <td><?=$Locations_Data_Sub_Arr->zip_code;?></td>
-              <td><?=$Locations_Data_Sub_Arr->city;?></td>
-              <td><?=$Locations_Data_Sub_Arr->province;?></td>
+              <td><?php echo $iSrno++;?></td>
+              <td><?php echo $Locations_Data_Sub_Arr->zip_code;?></td>
+              <td><?php echo $Locations_Data_Sub_Arr->city;?></td>
+              <td><?php echo $Locations_Data_Sub_Arr->province;?></td>
               <td>
               <?php
               echo Html::a('<i class="glyphicon glyphicon-eye-open"></i>', ['/location/view/','id'=>$Locations_Data_Sub_Arr->loc_id]);
@@ -108,10 +108,10 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 
 
-<?= $this->registerJsFile('@Pluginpath/datatables/jquery.dataTables.min.js',['depends' => [yii\web\JqueryAsset::className()]]);?>
-<?= $this->registerJsFile('@Pluginpath/datatables/dataTables.bootstrap.min.js',['depends' => [yii\web\JqueryAsset::className()]]);?>
+<?php echo  $this->registerJsFile('@Pluginpath/datatables/jquery.dataTables.min.js',['depends' => [yii\web\JqueryAsset::className()]]);?>
+<?php echo  $this->registerJsFile('@Pluginpath/datatables/dataTables.bootstrap.min.js',['depends' => [yii\web\JqueryAsset::className()]]);?>
 
-<?= $this->registerJs("
+<?php echo  $this->registerJs("
   $(function () {
     $('#example1').DataTable({
       'paging': true,

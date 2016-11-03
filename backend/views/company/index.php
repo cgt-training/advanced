@@ -18,9 +18,9 @@ $img_path = Yii::$app->request->baseUrl . '/uploads/';
 
 ?>
 <div class="company-index" style="margin-left:15px;">
-<h2><?= Yii::$app->session->getFlash('response_msg'); ?></h2>
+<h2><?php echo  Yii::$app->session->getFlash('response_msg'); ?></h2>
 
-    <h1><?= Html::encode('Companies List') ?></h1>
+    <h1><?php echo  Html::encode('Companies List') ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
      
@@ -28,7 +28,7 @@ $img_path = Yii::$app->request->baseUrl . '/uploads/';
     
         ?>
             <p>
-                <?=Html::a('Create Company', ['create'], ['class' => 'btn btn-success']) ?>
+                <?php echo Html::a('Create Company', ['create'], ['class' => 'btn btn-success']) ?>
                 
                 <?php /* Html::button('Create Company', ['value'=>Url::toRoute('company/create'), 'class' => 'btn btn-success' ]) */?>
             </p>
@@ -96,7 +96,7 @@ $img_path = Yii::$app->request->baseUrl . '/uploads/';
 ?>
 
 <?php Pjax::begin(['id'=>'companyPjax']); ?>
-        <?= GridView::widget([
+        <?php echo  GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => $Action_Column_Var,
@@ -127,10 +127,10 @@ $img_path = Yii::$app->request->baseUrl . '/uploads/';
             foreach ($Company_Arr as $key => $Company_Sub_Arr) {
               ?>
                 <tr>
-                  <td><?=$iSrno++;?></td>
-                  <td><?=$Company_Sub_Arr->c_name;?></td>
-                  <td><?=$Company_Sub_Arr->c_email;?></td>
-                  <td><?=$Company_Sub_Arr->c_add;?></td>
+                  <td><?php echo $iSrno++;?></td>
+                  <td><?php echo $Company_Sub_Arr->c_name;?></td>
+                  <td><?php echo $Company_Sub_Arr->c_email;?></td>
+                  <td><?php echo $Company_Sub_Arr->c_add;?></td>
                   <td>
                   <?php
                       echo Html::a('<i class="glyphicon glyphicon-eye-open"></i>', ['/company/view/','id'=>$Company_Sub_Arr->c_id]);
@@ -161,10 +161,10 @@ $img_path = Yii::$app->request->baseUrl . '/uploads/';
 </div>
 
 
-<?= $this->registerJsFile('@Pluginpath/datatables/jquery.dataTables.min.js',['depends' => [yii\web\JqueryAsset::className()]]);?>
-<?= $this->registerJsFile('@Pluginpath/datatables/dataTables.bootstrap.min.js',['depends' => [yii\web\JqueryAsset::className()]]);?>
+<?php echo  $this->registerJsFile('@Pluginpath/datatables/jquery.dataTables.min.js',['depends' => [yii\web\JqueryAsset::className()]]);?>
+<?php echo  $this->registerJsFile('@Pluginpath/datatables/dataTables.bootstrap.min.js',['depends' => [yii\web\JqueryAsset::className()]]);?>
 
-<?= $this->registerJs("
+<?php echo  $this->registerJs("
   $(function () {
     $('#company_table').DataTable({
       'paging': true,

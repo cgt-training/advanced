@@ -3,17 +3,18 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\Location;
-use backend\models\LocationSearch;
+use common\models\Location;
+use common\models\LocationSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\data\ActiveDataProvider;
+use common\components\CommonFunctionController;
 
 /**
  * LocationController implements the CRUD actions for Location model.
  */
-class LocationController extends Controller
+class LocationController extends CommonFunctionController
 {
     /**
      * @inheritdoc
@@ -79,14 +80,9 @@ class LocationController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
 
-            $command = (new \yii\db\Query())
-                                ->select(['MAX(loc_id)+1 as L_Max_Id'])
-                                ->from('location')
-                                ->createCommand();
+            /* Get Max Id */
+            $model->loc_id = $this->getMaxId('location','loc_id');
 
-            // returns all rows of the query result
-            $rows = $command->queryAll();
-            $model->loc_id = $rows[0]['L_Max_Id'];
             if(!$model->save()){
                 \Yii::$app->getSession()->setFlash('response_msg', 'Record not saved..');
             }
@@ -158,6 +154,8 @@ class LocationController extends Controller
         }
 
         $this->findModel($id)->delete();
+
+        \Yii::$app->getSession()->setFlash('response_msg', 'Record deleted successfully..');
 
         $searchModel = new LocationSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);

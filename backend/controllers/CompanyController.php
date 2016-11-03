@@ -3,22 +3,23 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\Company;
-use backend\models\Branches;
-use backend\models\CompanySearch;
-use backend\models\UploadForm;
+use common\models\Company;
+use common\models\Branches;
+use common\models\CompanySearch;
+use common\models\UploadForm;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
+use common\components\CommonFunctionController;
 
 
 /**
  * CompanyController implements the CRUD actions for Company model.
  */
-class CompanyController extends Controller
+class CompanyController extends CommonFunctionController
 {
     /**
      * @inheritdoc
@@ -49,8 +50,7 @@ class CompanyController extends Controller
         $searchModel = new CompanySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        $Company_Arr = Company::find()->orderBy('c_name')
-                              ->all();
+        $Company_Arr = Company::find()->orderBy('c_name')->all();
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -80,11 +80,6 @@ class CompanyController extends Controller
     {
         $model = new Company();
         $modelBranches = [new Branches];
-        //$modelBranches = [new Address];
-        /*echo "<pre>";
-        print_r($_FILES);
-        print_r($_REQUEST);
-        exit;*/
 
         if(!yii::$app->user->can('create company'))
         {
@@ -98,27 +93,14 @@ class CompanyController extends Controller
 
             if (Yii::$app->request->isPost) {
 
-                $command = (new \yii\db\Query())
-                                ->select(['MAX(c_id)+1 as C_Max_Id'])
-                                ->from('company')
-                                ->createCommand();
+                // Get Max Id
+                $model->c_id = $this->getMaxId('company','c_id');
 
-                // returns all rows of the query result
-                $rows = $command->queryAll();
-                
-                $model->c_id = $rows[0]['C_Max_Id'];
                 $model->c_start_date = date('Y-m-d H:i:s');
                 $model->c_create_date = date('Y-m-d H:i:s');
 
-
-                $branch_command = (new \yii\db\Query())
-                                 ->select(['MAX(b_id)+1 as B_Max_Id'])
-                                  ->from('branches')
-                                  ->createCommand();
-
-                // returns all rows of the query result
-                $branches_rows = $branch_command->queryAll();
-                $Max_Branch_Id = $branches_rows[0]['B_Max_Id'];
+                // Get Max Id
+                $Max_Branch_Id = $this->getMaxId('branches','b_id');
                 
                 $model->c_logo = UploadedFile::getInstance($model, 'c_logo');
                 $Upload_Model->imageFile = UploadedFile::getInstance($model, 'c_logo');
@@ -137,7 +119,8 @@ class CompanyController extends Controller
 
                 // validate all models
                 $valid = $model->validate();
-                $valid = $model::validateMultiple($modelBranches) && $valid;
+
+                //  $valid = $model::validateMultiple($modelBranches) && $valid;
 
                 
                 // $errors = $model->errors;
@@ -182,6 +165,8 @@ class CompanyController extends Controller
                 else
                   {
                     $errors = $model->errors;
+                    print_r($errors);
+                    exit;
                     if(isset($errors['c_email'][0]) && $errors['c_email'][0])
                       $Error_Msg = $errors['c_email'][0];
 

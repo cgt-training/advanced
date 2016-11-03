@@ -14,13 +14,13 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="department-view" style="width:50%;margin:0 auto;">
 
-    <h1 style="margin:15px;"><?= Html::encode($this->title) ?></h1>
+    <h1 style="margin:15px;"><?php echo  Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Index', ['/department',], ['class' => 'btn btn-primary','id'=>"company_id"]) ?>
+        <?php echo  Html::a('Index', ['/department',], ['class' => 'btn btn-primary','id'=>"company_id"]) ?>
     </p>
 
-    <?= DetailView::widget([
+    <?php echo  DetailView::widget([
         'model' => $model,
         'attributes' => [
             'c.c_name',

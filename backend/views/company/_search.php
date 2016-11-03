@@ -15,23 +15,23 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'c_id') ?>
+    <?php echo  $form->field($model, 'c_id') ?>
 
-    <?= $form->field($model, 'c_name') ?>
+    <?php echo  $form->field($model, 'c_name') ?>
 
-    <?= $form->field($model, 'c_email') ?>
+    <?php echo  $form->field($model, 'c_email') ?>
 
-    <?= $form->field($model, 'c_add') ?>
+    <?php echo  $form->field($model, 'c_add') ?>
 
-    <?= $form->field($model, 'c_start_date') ?>
+    <?php echo  $form->field($model, 'c_start_date') ?>
 
     <?php // echo $form->field($model, 'c_create_date') ?>
 
     <?php // echo $form->field($model, 'c_status') ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
+        <?php echo  Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
+        <?php echo  Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

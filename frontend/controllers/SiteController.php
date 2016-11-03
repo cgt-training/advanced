@@ -78,6 +78,8 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+       // \Yii::$app->view->theme = 'interior';
+        
         return $this->render('index');
     }
 

@@ -15,15 +15,15 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
+    <?php echo  $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'username') ?>
+    <?php echo  $form->field($model, 'username') ?>
 
-    <?= $form->field($model, 'auth_key') ?>
+    <?php echo  $form->field($model, 'auth_key') ?>
 
-    <?= $form->field($model, 'password_hash') ?>
+    <?php echo  $form->field($model, 'password_hash') ?>
 
-    <?= $form->field($model, 'password_reset_token') ?>
+    <?php echo  $form->field($model, 'password_reset_token') ?>
 
     <?php // echo $form->field($model, 'email') ?>
 
@@ -36,8 +36,8 @@ use yii\widgets\ActiveForm;
     <?php // echo $form->field($model, 'updated_at') ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
+        <?php echo  Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
+        <?php echo  Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

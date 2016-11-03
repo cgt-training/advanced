@@ -13,11 +13,11 @@ $this->title = 'Departments List';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="department-index" style="margin:15px;">
-<h2><?= Yii::$app->session->getFlash('response_msg'); ?></h2>
-    <h1><?= Html::encode($this->title) ?></h1>
+<h2><?php echo  Yii::$app->session->getFlash('response_msg'); ?></h2>
+    <h1><?php echo  Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-        <p><?= Html::button('Create Department', ['value'=>Url::toRoute('department/create'), 'class' => 'btn btn-success', 
+        <p><?php echo  Html::button('Create Department', ['value'=>Url::toRoute('department/create'), 'class' => 'btn btn-success', 
                                                     'id'=>'modalButton' ]) ?>
 </p>
 
@@ -91,7 +91,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <?php Pjax::begin(['id' => 'departmentPjax']); ?>    
-<?= GridView::widget([
+<?php echo  GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => $Action_Column_Var,
@@ -105,9 +105,9 @@ $this->params['breadcrumbs'][] = $this->title;
         <thead>
         <tr>
           <th>S.No</th>
+          <th>Department Name</th>
           <th>Company</th>
           <th>Branch Name</th>
-          <th>Address</th>
           <th>Actions</th>
         </tr>
         </thead>
@@ -125,10 +125,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
           ?>
             <tr>
-              <td><?=$iSrno++;?></td>
-              <td><?=$Dept_Sub_Arr['company']->c_name;?></td>
-              <td><?=$Dept_Sub_Arr['branch']->br_name;?></td>
-              <td><?=$Dept_Sub_Arr->dept_name;?></td>
+              <td><?php echo $iSrno++;?></td>
+              <td><?php echo $Dept_Sub_Arr->dept_name;?></td>
+              <td><?php echo $Dept_Sub_Arr['company']->c_name;?></td>
+              <td><?php echo $Dept_Sub_Arr['branch']->br_name;?></td>
               <td>
               <?php
                   echo Html::a('<i class="glyphicon glyphicon-eye-open"></i>', ['/department/view/','id'=>$Dept_Sub_Arr->dept_id]);
@@ -160,10 +160,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 
-<?= $this->registerJsFile('@Pluginpath/datatables/jquery.dataTables.min.js',['depends' => [yii\web\JqueryAsset::className()]]);?>
-<?= $this->registerJsFile('@Pluginpath/datatables/dataTables.bootstrap.min.js',['depends' => [yii\web\JqueryAsset::className()]]);?>
+<?php echo  $this->registerJsFile('@Pluginpath/datatables/jquery.dataTables.min.js',['depends' => [yii\web\JqueryAsset::className()]]);?>
+<?php echo  $this->registerJsFile('@Pluginpath/datatables/dataTables.bootstrap.min.js',['depends' => [yii\web\JqueryAsset::className()]]);?>
 
-<?= $this->registerJs("
+<?php echo  $this->registerJs("
   $(function () {
     $('#dept_table').DataTable({
       'paging': true,

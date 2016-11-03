@@ -13,22 +13,22 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin(['id' => 'user_form_id','options' => ['enctype' => 'multipart/form-data','class'=>'form-horizontal']]); ?>
     <div class="box-body">
 
-        <?= $form->field($model, 'username', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
+        <?php echo  $form->field($model, 'username', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
                                             'labelOptions' => [ 'class' => 'control-label col-sm-3','placeholder'=>'Id' ]
                                         ])->textInput(['maxlength' => true])?>
 
-        <?= $form->field($model, 'email', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
+        <?php echo  $form->field($model, 'email', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
                                             'labelOptions' => [ 'class' => 'control-label col-sm-3','placeholder'=>'Id' ]
                                         ])->textInput(['maxlength' => true])?>
 
-        <?= $form->field($model, 'role', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
+        <?php echo  $form->field($model, 'role', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
                                                     'labelOptions' => [ 'class' => 'control-label col-sm-3']
                                                 ])->dropDownList([ 'admin' => 'Admin', 'teacher' => 'Teacher', 'student'=>'Student'], ['prompt' => 'Select Role'])?>
 
 
         <div class="form-group col-sm-12 text-center">
-            <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-            <?= Html::a('Cancel', ['/user/'], ['class'=>'btn btn-danger']) ?>
+            <?php echo  Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+            <?php echo  Html::a('Cancel', ['/user/'], ['class'=>'btn btn-danger']) ?>
         </div>
     </div>
 

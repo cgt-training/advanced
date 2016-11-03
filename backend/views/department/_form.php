@@ -12,27 +12,27 @@ $Style_Var = $model->isNewRecord ? 'width:100%; margin:0 auto;' : 'width:50%; ma
 $Title_Val = $model->isNewRecord ? '' : "<h1>".Html::encode($this->title)."</h1>";
 ?>
 
-<div class="department-form" style="<?=$Style_Var;?>">
+<div class="department-form" style="<?php echo $Style_Var;?>">
 
     <?php $form = ActiveForm::begin(['id' => 'dept_form_id','options' => ['enctype' => 'multipart/form-data','class'=>'form-horizontal']]); ?>
 
-    <?=$Title_Val;?>
+    <?php echo $Title_Val;?>
 
     <div class="box-body">
 
-      <?= $form->field($model, 'c_id', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
+      <?php echo  $form->field($model, 'c_id', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
                                             'labelOptions' => [ 'class' => 'control-label col-sm-3',]
                                         ])->dropDownList($List_Company_Arr, ['prompt' => 'Select Company','class'=>'form-control select2','style'=>"width: 100%;"]) ?>
 
-      <?= $form->field($model, 'b_id', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
+      <?php echo  $form->field($model, 'b_id', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
                                             'labelOptions' => [ 'class' => 'control-label col-sm-3',]
                                         ])->dropDownList($List_Branches_Arr, ['prompt' => 'Select Branch','class'=>'form-control select2','style'=>"width: 100%;"]) ?>
 
-      <?= $form->field($model, 'dept_name', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
+      <?php echo  $form->field($model, 'dept_name', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
                                             'labelOptions' => [ 'class' => 'control-label col-sm-3',]
                                         ])->textInput(['maxlength' => true,'placeholder'=>'Department Name']) ?>
 
-      <?= $form->field($model, 'dtep_status', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
+      <?php echo  $form->field($model, 'dtep_status', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
                                             'labelOptions' => [ 'class' => 'control-label col-sm-3',]
                                         ])->dropDownList([ 'Yes' => 'Yes', 'No' => 'No', ], ['prompt' => 'Select Status','class'=>'form-control select2','style'=>"width: 100%;"]) ?>
 
@@ -50,8 +50,8 @@ $Title_Val = $model->isNewRecord ? '' : "<h1>".Html::encode($this->title)."</h1>
       ?>
 
       <div class="form-group col-sm-12 text-center">
-          <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary','id'=>'submit_id']) ?>
-          <?= Html::a('Cancel', ['/department/'], ['class'=>'btn btn-danger']) ?>
+          <?php echo  Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary','id'=>'submit_id']) ?>
+          <?php echo  Html::a('Cancel', ['/department/'], ['class'=>'btn btn-danger']) ?>
       </div>
     </div>
 
@@ -59,7 +59,7 @@ $Title_Val = $model->isNewRecord ? '' : "<h1>".Html::encode($this->title)."</h1>
 
 </div>
 
-<?= $this->registerJs("$('.select2').select2();");?>
+<?php echo  $this->registerJs("$('.select2').select2();");?>
 
 <script type="text/javascript">
 

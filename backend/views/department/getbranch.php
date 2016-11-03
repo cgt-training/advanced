@@ -14,6 +14,6 @@ use kartik\select2\Select2;
 
   <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'b_id', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
+    <?php echo  $form->field($model, 'b_id', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
                                             'labelOptions' => [ 'class' => 'control-label col-sm-3',]
                                         ])->dropDownList($List_Branches_Arr, ['prompt' => 'Select Branch','class'=>'form-control select2','style'=>"width: 100%;"]) ?>

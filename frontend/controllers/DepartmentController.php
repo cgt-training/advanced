@@ -3,10 +3,10 @@
 namespace frontend\controllers;
 
 use Yii;
-use frontend\models\Department;
-use frontend\models\Company;
-use frontend\models\Branches;
-use frontend\models\DepartmentSearch;
+use common\models\Department;
+use common\models\Company;
+use common\models\Branches;
+use common\models\DepartmentSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;

@@ -23,24 +23,24 @@ use wbraganca\dynamicform\DynamicFormWidget;
                     <div class="panel-body">
                         <div class="class="container-items"">
 
-                            <?= $form->field($modelCompany, 'c_name', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
+                            <?php echo  $form->field($modelCompany, 'c_name', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
                                                         'labelOptions' => [ 'class' => 'control-label col-sm-3' ]
                                                     ])->textInput(['maxlength' => true,'placeholder'=>'Company Name'])?>
 
                             
-                            <?= $form->field($modelCompany, 'c_email', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
+                            <?php echo  $form->field($modelCompany, 'c_email', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
                                                         'labelOptions' => [ 'class' => 'control-label col-sm-3' ]
                                                     ])->textInput(['maxlength' => true, 'placeholder'=>'Company Email'])?>
                             
-                            <?= $form->field($modelCompany, 'c_add', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
+                            <?php echo  $form->field($modelCompany, 'c_add', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
                                                         'labelOptions' => [ 'class' => 'control-label col-sm-3', 'placeholder'=>'Address']
                                                     ])->textarea(['rows' => 4])?>
 
-                             <?= $form->field($modelCompany, 'c_logo', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
+                             <?php echo  $form->field($modelCompany, 'c_logo', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
                                                         'labelOptions' => [ 'class' => 'control-label col-sm-3', 'placeholder'=>'Logo']
                                                         ])->fileInput()?>
 
-                            <?= $form->field($modelCompany, 'c_status', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
+                            <?php echo  $form->field($modelCompany, 'c_status', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
                                                                 'labelOptions' => [ 'class' => 'control-label col-sm-3']
                                                             ])->dropDownList([ 'Yes' => 'Yes', 'No' => 'No', ], ['prompt' => 'Select Status','class'=>'form-control select2','style'=>"width: 100%;"])?>
 
@@ -89,15 +89,15 @@ use wbraganca\dynamicform\DynamicFormWidget;
                                     }
                                 ?>
 
-                                <?= $form->field($modelBranches, "[{$i}]br_name", ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
+                                <?php echo  $form->field($modelBranches, "[{$i}]br_name", ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
                                             'labelOptions' => [ 'class' => 'control-label col-sm-3']
                                         ])->textInput(['maxlength' => true,'placeholder'=>'Branch Name']) ?>
 
-                                <?= $form->field($modelBranches, "[{$i}]br_address", ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
+                                <?php echo  $form->field($modelBranches, "[{$i}]br_address", ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
                                             'labelOptions' => [ 'class' => 'control-label col-sm-3']
                                         ])->textarea(['rows' => 4,'placeholder'=>'Address']) ?>
 
-                                <?= $form->field($modelBranches, "[{$i}]br_status", ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
+                                <?php echo  $form->field($modelBranches, "[{$i}]br_status", ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
                                                 'labelOptions' => [ 'class' => 'control-label col-sm-3',]
                                             ])->dropDownList([ 'Yes' => 'Yes', 'No' => 'No', ], ['prompt' => 'Select Stauts','class'=>'form-control select2','style'=>"width: 100%;"])?>
 
@@ -113,8 +113,8 @@ use wbraganca\dynamicform\DynamicFormWidget;
         </div>
 
         <div class="form-group col-sm-12 text-center">
-            <?= Html::submitButton($modelBranches->isNewRecord ? 'Create' : 'Update', ['class' => 'btn btn-primary']) ?>
-            <?= Html::a('Cancel', ['/user/'], ['class'=>'btn btn-danger']) ?>
+            <?php echo  Html::submitButton($modelBranches->isNewRecord ? 'Create' : 'Update', ['class' => 'btn btn-primary']) ?>
+            <?php echo  Html::a('Cancel', ['/user/'], ['class'=>'btn btn-danger']) ?>
         </div>
         </div>
     </div>
@@ -123,4 +123,4 @@ use wbraganca\dynamicform\DynamicFormWidget;
 
 </div>
 
-<?= $this->registerJs("$('.select2').select2();");?>
+<?php echo  $this->registerJs("$('.select2').select2();");?>

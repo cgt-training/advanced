@@ -11,29 +11,29 @@ $Style_Var = $model->isNewRecord ? 'width:100%; margin:0 auto;' : 'width:50%; ma
 $Title_Val = $model->isNewRecord ? '' : "<h1>".Html::encode($this->title)."</h1>";
 ?>
 
-<div class="location-form" style="<?=$Style_Var;?>">
+<div class="location-form" style="<?php echo $Style_Var;?>">
 
     <?php $form = ActiveForm::begin(['id' => 'location_form_id','options' => ['enctype' => 'multipart/form-data','class'=>'form-horizontal']]); ?>
 
-    <?=$Title_Val;?>
+    <?php echo $Title_Val;?>
 
     <div class="box-body">
 
-        <?= $form->field($model, 'zip_code', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
+        <?php echo  $form->field($model, 'zip_code', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
                                             'labelOptions' => [ 'class' => 'control-label col-sm-3',]
                                         ])->textInput(['maxlength' => true,'placeholder'=>'Zip Code']) ?>
 
-        <?= $form->field($model, 'city', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
+        <?php echo  $form->field($model, 'city', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
                                             'labelOptions' => [ 'class' => 'control-label col-sm-3',]
                                         ])->textInput(['maxlength' => true,'placeholder'=>'City']) ?>
 
-        <?= $form->field($model, 'province', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
+        <?php echo  $form->field($model, 'province', ['template' => "{label}\n<div class='col-sm-9'>{input}</div>\n{hint}\n{error}",
                                             'labelOptions' => [ 'class' => 'control-label col-sm-3',]
                                         ])->textInput(['maxlength' => true,'placeholder'=>'Province']) ?>
 
         <div class="form-group col-sm-12 text-center">
-            <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary','id'=>'submit_id']) ?>
-            <?= Html::a('Cancel', ['/location/'], ['class'=>'btn btn-danger']) ?>
+            <?php echo  Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary','id'=>'submit_id']) ?>
+            <?php echo  Html::a('Cancel', ['/location/'], ['class'=>'btn btn-danger']) ?>
         </div>
 
     </div>

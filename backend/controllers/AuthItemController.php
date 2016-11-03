@@ -3,9 +3,9 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\AuthItem;
-use backend\models\AuthItemChild;
-use backend\models\SearchAuthItem;
+use common\models\AuthItem;
+use common\models\AuthItemChild;
+use common\models\SearchAuthItem;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -149,6 +149,8 @@ class AuthItemController extends Controller
 
     public function actionAssignright()
     {
+        //print_r($_REQUEST);
+        //exit;
         $model = new AuthItem();
         $modelAuthItemChild = [new AuthItemChild];
 

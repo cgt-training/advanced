@@ -3,17 +3,18 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\Customer;
-use backend\models\Location;
-use backend\models\CustomerSearch;
+use common\models\Customer;
+use common\models\Location;
+use common\models\CustomerSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use common\components\CommonFunctionController;
 
 /**
  * CustomerController implements the CRUD actions for Customer model.
  */
-class CustomerController extends Controller
+class CustomerController extends CommonFunctionController
 {
     /**
      * @inheritdoc
@@ -89,7 +90,16 @@ class CustomerController extends Controller
 
         $model = new Customer();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+
+            $model->cust_id = $this->getMaxId('customer','cust_id');
+
+            if(!$model->save()){
+              \Yii::$app->getSession()->setFlash('response_msg', 'Record Not Saved ..');
+            }
+            else{
+              \Yii::$app->getSession()->setFlash('response_msg', 'Record Saved Successful..');
+            }
             //return $this->redirect(['view', 'id' => $model->cust_id]);
             //$searchModel = new CustomerSearch();
             //$dataProvider = $searchModel->search(Yii::$app->request->queryParams);

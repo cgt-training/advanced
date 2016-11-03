@@ -13,13 +13,13 @@ $img_path = Yii::$app->request->baseUrl . '/uploads/';
 ?>
 <div class="company-view" style="width:70%;margin:0 auto;">
 
-    <h1 class="margin-default" style="margin:15px;"><?= Html::encode($this->title) ?></h1>
+    <h1 class="margin-default" style="margin:15px;"><?php echo  Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Back', ['/company',], ['class' => 'btn btn-primary','id'=>"company_id"]) ?>
+        <?php echo  Html::a('Back', ['/company',], ['class' => 'btn btn-primary','id'=>"company_id"]) ?>
     </p>
 
-    <?= DetailView::widget([
+    <?php echo  DetailView::widget([
         'model' => $model,
         'attributes' => [
             'c_id',

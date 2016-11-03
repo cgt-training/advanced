@@ -2,7 +2,7 @@ $('#modalButton').click(function(){
 	$('#modal').modal('show').find('#modalContent').load($(this).attr('value'));
 });
 
-
+/*
  function load_data(event){
       //var url = event.data.url;
       $.ajax({
@@ -29,4 +29,33 @@ $('#modalButton').click(function(){
             return false;
         }});
       return false;	
-  }
+  }*/
+
+
+  $('#comp_more').click(function(){
+      $('#com_div').css("display","block");
+      $('#branch_div').css("display","none");
+      $('#dept_div').css("display","none");
+      $('#cust_div').css("display","none");
+  });
+
+  $('#branch_more').click(function(){
+      $('#com_div').css("display","none");
+      $('#branch_div').css("display","block");
+      $('#dept_div').css("display","none");
+      $('#cust_div').css("display","none");
+  });
+
+  $('#dept_more').click(function(){
+      $('#com_div').css("display","none");
+      $('#branch_div').css("display","none");
+      $('#dept_div').css("display","block");
+      $('#cust_div').css("display","none");
+  });
+
+  $('#cust_more').click(function(){
+      $('#com_div').css("display","none");
+      $('#branch_div').css("display","none");
+      $('#dept_div').css("display","none");
+      $('#cust_div').css("display","block");
+  });

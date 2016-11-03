@@ -3,9 +3,9 @@
 namespace frontend\controllers;
 
 use Yii;
-use frontend\models\Company;
-use frontend\models\CompanySearch;
-use frontend\models\UploadForm;
+use common\models\Company;
+use common\models\CompanySearch;
+use common\models\UploadForm;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;

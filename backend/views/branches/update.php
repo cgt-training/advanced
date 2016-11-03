@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="branches-update">
 
-    <?= $this->render('_form', [
+    <?php echo  $this->render('_form', [
         'model' => $model,
         'List_Company_Arr' => $List_Company_Arr,
     ]) ?>

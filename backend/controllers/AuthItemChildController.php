@@ -3,10 +3,10 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\Company;
-use backend\models\Branches;
-use backend\models\CompanySearch;
-use backend\models\UploadForm;
+use common\models\Company;
+use common\models\Branches;
+use common\models\CompanySearch;
+use common\models\UploadForm;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;

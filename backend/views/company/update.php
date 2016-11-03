@@ -12,9 +12,9 @@ $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="company-update" style="margin:15px;">
 
-    <div><h3><strong><?= Html::encode($this->title) ?></strong></h3></div>
+    <div><h3><strong><?php echo  Html::encode($this->title) ?></strong></h3></div>
 
-    <?= $this->render('_form', [
+    <?php echo  $this->render('_form', [
         'modelCompany' => $model,
         'modelBranches' => $modelBranches,
     ]) ?>

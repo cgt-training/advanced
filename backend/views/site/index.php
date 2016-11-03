@@ -30,7 +30,7 @@
             <div class="icon">
               <i class="ion ion-bag"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="#" id='comp_more' class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         
@@ -44,7 +44,7 @@
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="#" id='branch_more' class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         
@@ -58,7 +58,7 @@
             <div class="icon">
               <i class="ion ion-pie-graph"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="#" id='dept_more' class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         
@@ -72,7 +72,7 @@
             <div class="icon">
               <i class="ion ion-person-add"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="#" id='cust_more' class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         
@@ -84,6 +84,141 @@
           <div class="box box-info text-center">
             <h3 class="text-center">Welcome to DashBoard</h3>
           </div>
+          <div class="row">
+            <div class="col-md-12">&nbsp;</div>
+          </div>
+          <div id="com_div" style="display:none;">
+            <h3>Company Listing</h3>
+            <table id="company_table" class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>S.No</th>
+                  <th>Company Name</th>
+                  <th>Company Email</th>
+                  <th>Company Address</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+
+                $iSrno = 1;
+
+                foreach ($Company_Arr as $key => $Company_Sub_Arr) {
+                  ?>
+                    <tr>
+                      <td><?php echo $iSrno++;?></td>
+                      <td><?php echo $Company_Sub_Arr->c_name;?></td>
+                      <td><?php echo $Company_Sub_Arr->c_email;?></td>
+                      <td><?php echo $Company_Sub_Arr->c_add;?></td>
+                    </tr>
+                  <?php
+                }
+                ?>
+                </tbody>
+                <tfoot>
+                </tfoot>
+              </tbody>
+            </table>
+          </div>
+          <div id="branch_div" style="display:none;">
+              <h3>Branch Listing</h3>
+              <table id="branch_table" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>S.No</th>
+                  <th>Branch Name</th>
+                  <th>Company</th>
+                  <th>Address</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+
+                $iSrno = 1;
+
+                foreach ($Branches_Arr as $key => $Branch_Sub_Arr) {
+                  ?>
+                    <tr>
+                      <td><?php echo $iSrno++;?></td>
+                      <td><?php echo $Branch_Sub_Arr->br_name;?></td>
+                      <td><?php echo $Branch_Sub_Arr['company']->c_name;?></td>
+                      <td><?php echo $Branch_Sub_Arr->br_address;?></td>
+                    </tr>
+                  <?php
+                }
+                ?>
+                </tbody>
+                <tfoot>
+                </tfoot>
+              </table>
+          </div>
+          <div id="dept_div" style="display:none;">
+              <h3>Department Listing</h3>
+              <table id="dept_table" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>S.No</th>
+                  <th>Department Name</th>
+                  <th>Company</th>
+                  <th>Branch Name</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+
+                $iSrno = 1;
+
+                foreach ($Department_Arr as $key => $Dept_Sub_Arr) {
+                  ?>
+                    <tr>
+                      <td><?php echo $iSrno++;?></td>
+                      <td><?php echo $Dept_Sub_Arr->dept_name;?></td>
+                      <td><?php echo $Dept_Sub_Arr['company']->c_name;?></td>
+                      <td><?php echo $Dept_Sub_Arr['branch']->br_name;?></td>
+                    </tr>
+                  <?php
+                }
+                ?>
+                </tbody>
+                <tfoot>
+                </tfoot>
+              </table>
+          </div>
+          <div id="cust_div" style="display:none;">
+              <h3>Customer Listing</h3>
+              <table id="cust_table" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>S.No</th>
+                  <th>Customer Name</th>
+                  <th>Zip Code</th>
+                  <th>City</th>
+                  <th>Province</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+
+                $iSrno = 1;
+
+                foreach ($Customer_Arr as $key => $Cust_Sub_Arr) {
+                  ?>
+                    <tr>
+                      <td><?php echo $iSrno++;?></td>
+                      <td><?php echo $Cust_Sub_Arr->cust_name;?></td>
+                      <td><?php echo $Cust_Sub_Arr->zip_code;?></td>
+                      <td><?php echo $Cust_Sub_Arr->city;?></td>
+                      <td><?php echo $Cust_Sub_Arr->province;?></td>
+                    </tr>
+                  <?php
+                }
+                ?>
+                </tbody>
+                <tfoot>
+                </tfoot>
+              </table>
+          </div>
+
         </section>
         
         <section class="col-lg-5 connectedSortable">
@@ -167,6 +302,4 @@
         </section>
         
       </div>
-      
-
     </section>

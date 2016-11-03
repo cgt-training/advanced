@@ -12,9 +12,9 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="auth-item-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?php echo  Html::encode($this->title) ?></h1>
 
-    <?= $this->render('_assign-form', [
+    <?php echo  $this->render('_assign-form', [
         'modelAuthItem' => $model,
         'Auth_Item_Child_Arr' => $Auth_Item_Child_Arr,
         'modelAuthItemChild' => $modelAuthItemChild,

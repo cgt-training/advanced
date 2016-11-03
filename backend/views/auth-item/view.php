@@ -12,13 +12,13 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="auth-item-view" style="width:50%;margin:0 auto;">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?php echo  Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Back', ['index'], ['class' => 'btn btn-primary']) ?>
+        <?php echo  Html::a('Back', ['index'], ['class' => 'btn btn-primary']) ?>
     </p>
 
-    <?= DetailView::widget([
+    <?php echo  DetailView::widget([
         'model' => $model,
         'attributes' => [
             'name',

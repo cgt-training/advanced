@@ -13,8 +13,8 @@ $this->title = 'Users Listing';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-index" style="margin-left:15px;">
-    <h2><?= Yii::$app->session->getFlash('response_msg'); ?></h2>
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h2><?php echo  Yii::$app->session->getFlash('response_msg'); ?></h2>
+    <h1><?php echo  Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 Modal::end();*/
     ?>
 
-<?php /*Pjax::begin(); ?>    <?= GridView::widget([
+<?php /*Pjax::begin(); ?>    <?php echo  GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
@@ -78,9 +78,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
               ?>
                 <tr>
-                  <td><?=$iSrno++;?></td>
-                  <td><?=$Users_Sub_Arr->username;?></td>
-                  <td><?=$Users_Sub_Arr->role;?></td>
+                  <td><?php echo $iSrno++;?></td>
+                  <td><?php echo $Users_Sub_Arr->username;?></td>
+                  <td><?php echo $Users_Sub_Arr->role;?></td>
                   <td>
                   <?php
                       echo Html::a('<i class="glyphicon glyphicon-eye-open"></i>', ['/user/view/','id'=>$Users_Sub_Arr->id]);
@@ -110,10 +110,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
 </div>
 
-<?= $this->registerJsFile('@Pluginpath/datatables/jquery.dataTables.min.js',['depends' => [yii\web\JqueryAsset::className()]]);?>
-<?= $this->registerJsFile('@Pluginpath/datatables/dataTables.bootstrap.min.js',['depends' => [yii\web\JqueryAsset::className()]]);?>
+<?php echo  $this->registerJsFile('@Pluginpath/datatables/jquery.dataTables.min.js',['depends' => [yii\web\JqueryAsset::className()]]);?>
+<?php echo  $this->registerJsFile('@Pluginpath/datatables/dataTables.bootstrap.min.js',['depends' => [yii\web\JqueryAsset::className()]]);?>
 
-<?= $this->registerJs("
+<?php echo  $this->registerJs("
   $(function () {
     $('#example1').DataTable({
       'paging': true,

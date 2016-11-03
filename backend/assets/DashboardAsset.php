@@ -33,7 +33,7 @@ class DashboardAsset extends AssetBundle
                     'js/select2.full.js',
                     '//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js',
                     'js/jquery-ui.min.js',
-                    'js/bootstrap.min.js',
+                    //'js/bootstrap.min.js',
                     //'plugins/morris/morris.min.js',
                     'plugins/sparkline/jquery.sparkline.min.js',
                     'plugins/jvectormap/jquery-jvectormap-1.2.2.min.js',
@@ -55,6 +55,7 @@ class DashboardAsset extends AssetBundle
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
+        'yii\bootstrap\BootstrapPluginAsset',
         'yii\web\JqueryAsset',
     ];
 }

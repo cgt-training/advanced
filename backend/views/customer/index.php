@@ -13,8 +13,8 @@ $this->title = 'Customers List';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="customer-index" style="margin:15px;">
-    <h2><?= Yii::$app->session->getFlash('response_msg'); ?></h2>
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h2><?php echo  Yii::$app->session->getFlash('response_msg'); ?></h2>
+    <h1><?php echo  Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
        
@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <p>
                 <?php 
                     Html::a('Create Company', ['create'], ['class' => 'btn btn-success']) ?>
-                <?= Html::button('Create Customer', ['value'=>Url::toRoute('customer/create'), 'class' => 'btn btn-success',
+                <?php echo  Html::button('Create Customer', ['value'=>Url::toRoute('customer/create'), 'class' => 'btn btn-success',
                                     'id'=>'modalButton' ]) ?>
             </p>
             <?php
@@ -98,7 +98,7 @@ $this->params['breadcrumbs'][] = $this->title;
     }
 ?>
 
-<?php Pjax::begin(); ?>    <?= GridView::widget([
+<?php Pjax::begin(); ?>    <?php echo  GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => $Action_Column_Var,
@@ -125,11 +125,11 @@ $this->params['breadcrumbs'][] = $this->title;
         foreach ($Customer_Arr as $key => $Cust_Sub_Arr) {
           ?>
             <tr>
-              <td><?=$iSrno++;?></td>
-              <td><?=$Cust_Sub_Arr->cust_name;?></td>
-              <td><?=$Cust_Sub_Arr->zip_code;?></td>
-              <td><?=$Cust_Sub_Arr->city;?></td>
-              <td><?=$Cust_Sub_Arr->province;?></td>
+              <td><?php echo $iSrno++;?></td>
+              <td><?php echo $Cust_Sub_Arr->cust_name;?></td>
+              <td><?php echo $Cust_Sub_Arr->zip_code;?></td>
+              <td><?php echo $Cust_Sub_Arr->city;?></td>
+              <td><?php echo $Cust_Sub_Arr->province;?></td>
               <td>
               <?php
                   echo Html::a('<i class="glyphicon glyphicon-eye-open"></i>', ['/customer/view/','id'=>$Cust_Sub_Arr->cust_id]);
@@ -159,10 +159,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
 </div>
 
-<?= $this->registerJsFile('@Pluginpath/datatables/jquery.dataTables.min.js',['depends' => [yii\web\JqueryAsset::className()]]);?>
-<?= $this->registerJsFile('@Pluginpath/datatables/dataTables.bootstrap.min.js',['depends' => [yii\web\JqueryAsset::className()]]);?>
+<?php echo  $this->registerJsFile('@Pluginpath/datatables/jquery.dataTables.min.js',['depends' => [yii\web\JqueryAsset::className()]]);?>
+<?php echo  $this->registerJsFile('@Pluginpath/datatables/dataTables.bootstrap.min.js',['depends' => [yii\web\JqueryAsset::className()]]);?>
 
-<?= $this->registerJs("
+<?php echo  $this->registerJs("
   $(function () {
     $('#cust_table').DataTable({
       'paging': true,
